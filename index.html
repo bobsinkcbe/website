@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium tattoo studio offering custom artwork, professional artists, and exceptional aftercare. Book your session today.">
+    <meta name="keywords" content="tattoo studio, custom tattoos, professional artists, ink, body art">
+    <title>Ink Haven Studio - Premium Tattoo Artistry</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta property="og:title" content="Ink Haven Studio - Premium Tattoo Artistry">
+    <meta property="og:description" content="Where art meets skin. Premium tattoo studio with award-winning artists.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://inkhaenstudio.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="ink-drop"></div>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>INK HAVEN</h2>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#artists" class="nav-link">Artists</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#gallery" class="nav-link">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">Our Story</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#aftercare" class="nav-link">Aftercare</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#blog" class="nav-link">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+                <div class="nav-cta">
+                    <a href="#booking" class="btn btn-primary">Book Now</a>
+                </div>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <video autoplay muted loop>
+                <source src="assets/videos/hero-bg.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title" data-aos="fade-up">
+                WHERE ART<br>
+                <span class="highlight">MEETS SKIN</span>
+            </h1>
+            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+                Premium tattoo artistry in a world-class studio environment
+            </p>
+            <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
+                <a href="#booking" class="btn btn-primary btn-large">Book Consultation</a>
+                <a href="#gallery" class="btn btn-secondary btn-large">View Gallery</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span></span>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up">
+                    <div class="feature-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Award-Winning Artists</h3>
+                    <p>Our team of internationally recognized artists brings decades of experience</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Sterile Environment</h3>
+                    <p>State-of-the-art sterilization and safety protocols exceed industry standards</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Custom Designs</h3>
+                    <p>Every piece is uniquely crafted to tell your personal story</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artists Section -->
+    <section id="artists" class="artists">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Meet Our Artists</h2>
+                <p class="section-subtitle">Masters of their craft, storytellers through ink</p>
+            </div>
+            <div class="artists-grid">
+                <div class="artist-card" data-aos="fade-up">
+                    <div class="artist-image">
+                        <img src="assets/images/artist1.jpg" alt="Marcus Rivera" loading="lazy">
+                        <div class="artist-overlay">
+                            <div class="artist-social">
+                                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                <a href="#" aria-label="Portfolio"><i class="fas fa-images"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="artist-info">
+                        <h3>Marcus Rivera</h3>
+                        <p class="artist-specialty">Realism & Portraits</p>
+                        <p class="artist-bio">15+ years specializing in hyperrealistic portraits and black & grey masterpieces.</p>
+                        <a href="#" class="btn btn-outline btn-small">View Portfolio</a>
+                    </div>
+                </div>
+                <div class="artist-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="artist-image">
+                        <img src="assets/images/artist2.jpg" alt="Sakura Chen" loading="lazy">
+                        <div class="artist-overlay">
+                            <div class="artist-social">
+                                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                <a href="#" aria-label="Portfolio"><i class="fas fa-images"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="artist-info">
+                        <h3>Sakura Chen</h3>
+                        <p class="artist-specialty">Japanese Traditional</p>
+                        <p class="artist-bio">Master of traditional Japanese techniques with contemporary artistic vision.</p>
+                        <a href="#" class="btn btn-outline btn-small">View Portfolio</a>
+                    </div>
+                </div>
+                <div class="artist-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="artist-image">
+                        <img src="assets/images/artist3.jpg" alt="Alex Thompson" loading="lazy">
+                        <div class="artist-overlay">
+                            <div class="artist-social">
+                                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                <a href="#" aria-label="Portfolio"><i class="fas fa-images"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="artist-info">
+                        <h3>Alex Thompson</h3>
+                        <p class="artist-specialty">Neo-Traditional</p>
+                        <p class="artist-bio">Bold colors and modern interpretations of classic tattoo styles.</p>
+                        <a href="#" class="btn btn-outline btn-small">View Portfolio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Our Work</h2>
+                <p class="section-subtitle">A showcase of artistry and precision</p>
+            </div>
+            <div class="gallery-filters" data-aos="fade-up" data-aos-delay="100">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="realism">Realism</button>
+                <button class="filter-btn" data-filter="traditional">Traditional</button>
+                <button class="filter-btn" data-filter="neo-traditional">Neo-Traditional</button>
+                <button class="filter-btn" data-filter="blackwork">Blackwork</button>
+                <button class="filter-btn" data-filter="color">Color</button>
+            </div>
+            <div class="gallery-grid" id="gallery-grid">
+                <!-- Gallery items will be loaded dynamically -->
+            </div>
+            <div class="gallery-load-more" data-aos="fade-up">
+                <button class="btn btn-outline" id="load-more">Load More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text" data-aos="fade-right">
+                    <h2 class="section-title">Our Story</h2>
+                    <p class="about-description">
+                        Founded in 2015, Ink Haven Studio emerged from a shared vision: to create a space where 
+                        artistry and craftsmanship converge in perfect harmony. What started as a small collective 
+                        of passionate artists has evolved into one of the city's most respected tattoo destinations.
+                    </p>
+                    <p class="about-description">
+                        Our studio is more than just a place to get inked—it's a sanctuary for self-expression, 
+                        a gallery of living art, and a community where stories come to life through permanent 
+                        masterpieces. Every tattoo we create is a collaboration between artist and canvas, 
+                        resulting in unique pieces that stand the test of time.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <h3>5000+</h3>
+                            <p>Happy Clients</p>
+                        </div>
+                        <div class="stat">
+                            <h3>8</h3>
+                            <p>Master Artists</p>
+                        </div>
+                        <div class="stat">
+                            <h3>9</h3>
+                            <p>Years Experience</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image" data-aos="fade-left">
+                    <img src="assets/images/studio-interior.jpg" alt="Studio Interior" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="booking">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Book Your Session</h2>
+                <p class="section-subtitle">Ready to start your ink journey? Let's make it happen.</p>
+            </div>
+            <div class="booking-content">
+                <div class="booking-form-container" data-aos="fade-right">
+                    <form class="booking-form" id="booking-form">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="artist">Preferred Artist</label>
+                            <select id="artist" name="artist">
+                                <option value="">Any Available</option>
+                                <option value="marcus">Marcus Rivera</option>
+                                <option value="sakura">Sakura Chen</option>
+                                <option value="alex">Alex Thompson</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="style">Tattoo Style</label>
+                            <select id="style" name="style">
+                                <option value="">Not Sure</option>
+                                <option value="realism">Realism</option>
+                                <option value="traditional">Traditional</option>
+                                <option value="neo-traditional">Neo-Traditional</option>
+                                <option value="blackwork">Blackwork</option>
+                                <option value="color">Color Work</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="size">Approximate Size</label>
+                            <select id="size" name="size">
+                                <option value="small">Small (2-4 inches)</option>
+                                <option value="medium">Medium (4-8 inches)</option>
+                                <option value="large">Large (8+ inches)</option>
+                                <option value="sleeve">Full/Half Sleeve</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Describe Your Idea *</label>
+                            <textarea id="description" name="description" rows="4" required placeholder="Tell us about your tattoo idea, placement, and any reference images you have..."></textarea>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="first-tattoo" name="first-tattoo">
+                                <span class="checkmark"></span>
+                                This is my first tattoo
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large">Submit Consultation Request</button>
+                    </form>
+                </div>
+                <div class="booking-info" data-aos="fade-left">
+                    <div class="info-card">
+                        <h3>What to Expect</h3>
+                        <ul>
+                            <li>Free consultation to discuss your design</li>
+                            <li>Custom artwork created just for you</li>
+                            <li>Transparent pricing with no hidden fees</li>
+                            <li>Comprehensive aftercare instructions</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3>Preparation Tips</h3>
+                        <ul>
+                            <li>Get a good night's sleep before your session</li>
+                            <li>Eat a proper meal beforehand</li>
+                            <li>Stay hydrated and avoid alcohol</li>
+                            <li>Bring reference images if you have them</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aftercare Section -->
+    <section id="aftercare" class="aftercare">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Aftercare Guide</h2>
+                <p class="section-subtitle">Proper care ensures your tattoo heals beautifully and lasts forever</p>
+            </div>
+            <div class="aftercare-content">
+                <div class="aftercare-timeline" data-aos="fade-up">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">1</div>
+                        <div class="timeline-content">
+                            <h3>First 24 Hours</h3>
+                            <ul>
+                                <li>Keep the bandage on for 2-3 hours</li>
+                                <li>Gently wash with unscented soap</li>
+                                <li>Pat dry with clean paper towel</li>
+                                <li>Apply thin layer of recommended ointment</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">2</div>
+                        <div class="timeline-content">
+                            <h3>Days 2-7</h3>
+                            <ul>
+                                <li>Wash 2-3 times daily with gentle soap</li>
+                                <li>Continue applying ointment sparingly</li>
+                                <li>Avoid submerging in water</li>
+                                <li>Don't pick at scabs or peeling skin</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">3</div>
+                        <div class="timeline-content">
+                            <h3>Week 2-4</h3>
+                            <ul>
+                                <li>Switch to unscented lotion</li>
+                                <li>Continue gentle washing routine</li>
+                                <li>Avoid direct sunlight</li>
+                                <li>Your tattoo should be fully healed</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Client Stories</h2>
+                <p class="section-subtitle">Hear from our satisfied clients</p>
+            </div>
+            <div class="testimonials-slider" data-aos="fade-up" data-aos-delay="100">
+                <div class="testimonial-card active">
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Absolutely incredible experience! Marcus created the most beautiful portrait of my grandmother. The detail and emotion he captured brought tears to my eyes. Professional, clean, and caring - I couldn't ask for more."</p>
+                        <div class="testimonial-author">
+                            <img src="assets/images/client1.jpg" alt="Sarah Johnson" loading="lazy">
+                            <div class="author-info">
+                                <h4>Sarah Johnson</h4>
+                                <span>Portrait Tattoo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Sakura's traditional Japanese work is phenomenal. My koi sleeve is a masterpiece that gets compliments everywhere I go. The studio atmosphere was perfect - professional yet relaxed. Highly recommend!"</p>
+                        <div class="testimonial-author">
+                            <img src="assets/images/client2.jpg" alt="Mike Chen" loading="lazy">
+                            <div class="author-info">
+                                <h4>Mike Chen</h4>
+                                <span>Japanese Sleeve</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"First-time tattoo experience and I was nervous, but Alex made me feel completely at ease. The neo-traditional flower piece he designed exceeded all my expectations. Thank you for making my vision come to life!"</p>
+                        <div class="testimonial-author">
+                            <img src="assets/images/client3.jpg" alt="Emma Rodriguez" loading="lazy">
+                            <div class="author-info">
+                                <h4>Emma Rodriguez</h4>
+                                <span>Neo-Traditional</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-navigation">
+                <button class="nav-btn prev-btn" id="prev-testimonial">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="nav-btn next-btn" id="next-testimonial">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Ink Culture Blog</h2>
+                <p class="section-subtitle">Stories, trends, and insights from the tattoo world</p>
+            </div>
+            <div class="blog-grid">
+                <article class="blog-card" data-aos="fade-up">
+                    <div class="blog-image">
+                        <img src="assets/images/blog1.jpg" alt="Tattoo Aftercare" loading="lazy">
+                        <div class="blog-category">Aftercare</div>
+                    </div>
+                    <div class="blog-content">
+                        <h3><a href="blog/tattoo-aftercare-guide.html">The Complete Guide to Tattoo Aftercare</a></h3>
+                        <p>Everything you need to know about caring for your new tattoo to ensure optimal healing and vibrant colors that last.</p>
+                        <div class="blog-meta">
+                            <span class="blog-date">Oct 20, 2024</span>
+                            <span class="blog-author">by Marcus Rivera</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="blog-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="blog-image">
+                        <img src="assets/images/blog2.jpg" alt="Tattoo Styles" loading="lazy">
+                        <div class="blog-category">Styles</div>
+                    </div>
+                    <div class="blog-content">
+                        <h3><a href="blog/tattoo-style-guide.html">Choosing the Right Tattoo Style for You</a></h3>
+                        <p>Explore different tattoo styles and find the perfect artistic approach for your personal story and aesthetic preferences.</p>
+                        <div class="blog-meta">
+                            <span class="blog-date">Oct 15, 2024</span>
+                            <span class="blog-author">by Sakura Chen</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="blog-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="blog-image">
+                        <img src="assets/images/blog3.jpg" alt="Tattoo Trends" loading="lazy">
+                        <div class="blog-category">Trends</div>
+                    </div>
+                    <div class="blog-content">
+                        <h3><a href="blog/2024-tattoo-trends.html">2024 Tattoo Trends: What's Hot Right Now</a></h3>
+                        <p>Discover the latest trends in tattoo artistry, from minimalist designs to bold neo-traditional pieces that are making waves.</p>
+                        <div class="blog-meta">
+                            <span class="blog-date">Oct 10, 2024</span>
+                            <span class="blog-author">by Alex Thompson</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="blog-cta" data-aos="fade-up">
+                <a href="blog.html" class="btn btn-outline">View All Posts</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Feed Section -->
+    <section class="instagram-feed">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Follow Our Journey</h2>
+                <p class="section-subtitle">@inkhavenstudio</p>
+            </div>
+            <div class="instagram-grid" id="instagram-grid" data-aos="fade-up" data-aos-delay="100">
+                <!-- Instagram posts will be loaded dynamically -->
+            </div>
+            <div class="instagram-cta" data-aos="fade-up">
+                <a href="https://instagram.com/inkhavenstudio" target="_blank" class="btn btn-primary">
+                    <i class="fab fa-instagram"></i>
+                    Follow Us on Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Visit Our Studio</h2>
+                <p class="section-subtitle">Located in the heart of the city</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info" data-aos="fade-right">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Studio Location</h3>
+                        <p>123 Art District Street<br>Downtown, City 12345</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3>Phone</h3>
+                        <p>(555) 123-TATTOO<br>(555) 123-8288</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Hours</h3>
+                        <p>Tue-Sat: 12PM - 8PM<br>Sun: 12PM - 6PM<br>Closed Mondays</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email</h3>
+                        <p>info@inkhavenstudio.com<br>booking@inkhavenstudio.com</p>
+                    </div>
+                </div>
+                <div class="contact-map" data-aos="fade-left">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>INK HAVEN STUDIO</h3>
+                    <p>Where art meets skin. Creating timeless masterpieces since 2015.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#artists">Our Artists</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#booking">Book Session</a></li>
+                        <li><a href="#aftercare">Aftercare</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Custom Tattoos</a></li>
+                        <li><a href="#">Cover-ups</a></li>
+                        <li><a href="#">Touch-ups</a></li>
+                        <li><a href="#">Consultations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>123 Art District Street<br>Downtown, City 12345</p>
+                    <p>Phone: (555) 123-8288</p>
+                    <p>Email: info@inkhavenstudio.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Ink Haven Studio. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="sitemap.html">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/booking.js"></script>
+    <script src="js/instagram.js"></script>
+</body>
+</html>
