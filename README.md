@@ -1,4 +1,4 @@
-# Ink Haven Studio - Premium Tattoo Studio Website
+# Bob's Tattoo - Premium Tattoo Studio Website
 
 A modern, visually striking website for a tattoo studio that blends edgy artistry with professional polish. Built with HTML5, CSS3, and vanilla JavaScript for optimal performance and SEO.
 
@@ -265,7 +265,7 @@ Key mobile features:
 ## 📞 Support
 
 For technical support or customization services:
-- Email: support@inkhavenstudio.com
+- Email: bobsinkcbe@gmail.com
 - Documentation: Check inline code comments
 - Issues: Create GitHub issue for bugs
 

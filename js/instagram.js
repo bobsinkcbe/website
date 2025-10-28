@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Instagram configuration
 const instagramConfig = {
-    username: 'inkhavenstudio',
+    username: 'bobs_tattoo',
     postsToShow: 12,
     accessToken: 'YOUR_INSTAGRAM_ACCESS_TOKEN', // Replace with actual token
     refreshInterval: 300000 // 5 minutes

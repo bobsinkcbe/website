@@ -570,14 +570,14 @@ function shareImage() {
     
     if (navigator.share) {
         navigator.share({
-            title: `${item.title} - Ink Haven Studio`,
+            title: `${item.title} - Bob's Tattoo`,
             text: `Check out this amazing tattoo: ${item.title} by ${item.artist}`,
             url: window.location.href
         });
     } else {
         // Fallback for browsers that don't support Web Share API
         const url = window.location.href;
-        const text = `Check out this amazing tattoo: ${item.title} by ${item.artist} at Ink Haven Studio`;
+        const text = `Check out this amazing tattoo: ${item.title} by ${item.artist} at Bob's Tattoo`;
         
         if (navigator.clipboard) {
             navigator.clipboard.writeText(`${text} - ${url}`);

@@ -1,6 +1,6 @@
 /* Service Worker for Performance and Caching */
 
-const CACHE_NAME = 'ink-haven-v1';
+const CACHE_NAME = 'bobs-tattoo-v1';
 const urlsToCache = [
     '/',
     '/css/styles.css',

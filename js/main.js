@@ -497,5 +497,5 @@ window.addEventListener('error', function(e) {
 });
 
 // Console branding
-console.log('%c🎨 Ink Haven Studio', 'color: #ff6b35; font-size: 24px; font-weight: bold;');
+console.log('%c🎨 Bob\'s Tattoo', 'color: #ff6b35; font-size: 24px; font-weight: bold;');
 console.log('%cWebsite crafted with ❤️', 'color: #666; font-size: 14px;');

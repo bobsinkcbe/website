@@ -1,4 +1,345 @@
-/* Animation Utilities */
+/* WARM ELEGANCE & GALLERY SOPHISTICATION ANIMATIONS */
+
+/* Modern Bright Orange Animations */
+@keyframes orangePulse {
+    0% {
+        box-shadow: 0 0 5px var(--bright-orange);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 25px var(--bright-orange), 0 0 35px var(--warm-orange);
+        transform: scale(1.05);
+    }
+    100% {
+        box-shadow: 0 0 5px var(--bright-orange);
+        transform: scale(1);
+    }
+}
+
+@keyframes orangeGlow {
+    0% {
+        filter: drop-shadow(0 0 5px rgba(255, 140, 0, 0.3));
+    }
+    50% {
+        filter: drop-shadow(0 0 20px rgba(255, 140, 0, 0.6))
+                drop-shadow(0 0 35px rgba(255, 107, 53, 0.4));
+    }
+    100% {
+        filter: drop-shadow(0 0 5px rgba(255, 140, 0, 0.3));
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes rotateIn {
+    0% {
+        opacity: 0;
+        transform: rotate(-10deg) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+    }
+    14% {
+        transform: scale(1.1);
+    }
+    28% {
+        transform: scale(1);
+    }
+    42% {
+        transform: scale(1.1);
+    }
+    70% {
+        transform: scale(1);
+    }
+}
+
+@keyframes wiggle {
+    0%, 7% {
+        transform: rotateZ(0);
+    }
+    15% {
+        transform: rotateZ(-15deg);
+    }
+    20% {
+        transform: rotateZ(10deg);
+    }
+    25% {
+        transform: rotateZ(-10deg);
+    }
+    30% {
+        transform: rotateZ(6deg);
+    }
+    35% {
+        transform: rotateZ(-4deg);
+    }
+    40%, 100% {
+        transform: rotateZ(0);
+    }
+}
+
+/* Warm Bronze Glow Effect */
+@keyframes warmGlow {
+    0% {
+        filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.9)) 
+                drop-shadow(0 0 20px rgba(205, 127, 50, 0.3))
+                drop-shadow(0 0 35px rgba(184, 115, 51, 0.15));
+    }
+    50% {
+        filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.9)) 
+                drop-shadow(0 0 30px rgba(205, 127, 50, 0.5))
+                drop-shadow(0 0 50px rgba(184, 115, 51, 0.25))
+                drop-shadow(0 0 70px rgba(139, 90, 43, 0.1));
+    }
+    100% {
+        filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.9)) 
+                drop-shadow(0 0 20px rgba(205, 127, 50, 0.3))
+                drop-shadow(0 0 35px rgba(184, 115, 51, 0.15));
+    }
+}
+
+/* Gallery-Style Sophisticated Float */
+@keyframes galleryFloat {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    33% {
+        transform: translateY(-2px);
+    }
+    66% {
+        transform: translateY(-4px);
+    }
+}
+
+/* Jewel Tone Pulse */
+@keyframes jewelPulse {
+    0% {
+        box-shadow: 0 0 5px var(--sapphire);
+    }
+    33% {
+        box-shadow: 0 0 15px var(--emerald), 0 0 25px var(--sapphire);
+    }
+    66% {
+        box-shadow: 0 0 20px var(--ruby), 0 0 30px var(--emerald);
+    }
+    100% {
+        box-shadow: 0 0 5px var(--sapphire);
+    }
+}
+
+/* Warm Shimmer Effect */
+@keyframes warmShimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Artistic Depth Reveal */
+@keyframes depthReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Subtle Float Animation */
+@keyframes subtleFloat {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+/* Sophisticated Pulse */
+@keyframes sophisticatedPulse {
+    0% {
+        box-shadow: 0 0 5px var(--primary-color);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 15px var(--primary-color), 0 0 25px var(--accent-color);
+        transform: scale(1.02);
+    }
+    100% {
+        box-shadow: 0 0 5px var(--primary-color);
+        transform: scale(1);
+    }
+}
+
+/* Gentle Fade In */
+@keyframes gentleFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Refined Shimmer */
+@keyframes refinedShimmer {
+    0% {
+        background-position: -100% 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+/* Pulse Glow Effect */
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 5px var(--primary-color);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 25px var(--primary-color), 0 0 35px var(--accent-color);
+        transform: scale(1.05);
+    }
+    100% {
+        box-shadow: 0 0 5px var(--primary-color);
+        transform: scale(1);
+    }
+}
+
+/* Floating Animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Neon Text Glow */
+@keyframes neonGlow {
+    0%, 100% {
+        text-shadow: 
+            0 0 5px var(--primary-color),
+            0 0 10px var(--primary-color),
+            0 0 15px var(--primary-color);
+    }
+    50% {
+        text-shadow: 
+            0 0 10px var(--primary-color),
+            0 0 20px var(--primary-color),
+            0 0 30px var(--primary-color),
+            0 0 40px var(--accent-color);
+    }
+}
+
+/* Rotating Border */
+@keyframes rotateBorder {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Shake Effect */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+    20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+/* Color Wave */
+@keyframes colorWave {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Zoom Bounce */
+@keyframes zoomBounce {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -515,6 +856,54 @@
 
 .artist-card:hover .artist-overlay {
     animation: artist-overlay-reveal 0.3s ease forwards;
+}
+
+/* NEW ENHANCED ANIMATIONS */
+
+/* Card Flip Effect */
+@keyframes cardFlip {
+    0% { transform: perspective(400px) rotateY(0); }
+    100% { transform: perspective(400px) rotateY(180deg); }
+}
+
+/* Slide In Effects */
+@keyframes slideInLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Elastic Bounce */
+@keyframes elasticBounce {
+    0% { transform: scale(1); }
+    20% { transform: scale(1.2); }
+    40% { transform: scale(0.9); }
+    60% { transform: scale(1.1); }
+    80% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+/* Background Gradient Animation */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* Scroll indicator animation */

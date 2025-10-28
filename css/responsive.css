@@ -1,5 +1,20 @@
 /* Responsive Design - Mobile First Approach */
 
+/* Logo Responsive Adjustments */
+@media (max-width: 768px) {
+    .nav-logo .logo-img,
+    .navbar .nav-logo img.logo-img {
+        max-width: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-logo .logo-img,
+    .navbar .nav-logo img.logo-img {
+        max-width: 40px;
+    }
+}
+
 /* Extra Small Devices (Phones, 576px and down) */
 @media (max-width: 575.98px) {
     /* Typography adjustments */

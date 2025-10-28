@@ -1,6 +1,6 @@
 # Assets Directory Structure
 
-This directory contains all media assets for the Ink Haven Studio website.
+This directory contains all media assets for the Bob's Tattoo website.
 
 ## Directory Structure
 
