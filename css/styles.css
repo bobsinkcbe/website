@@ -16,7 +16,284 @@ body, p, .nav-link, .btn, span, div {
     font-weight: 400 !important;
 }
 
-/* Enhanced Animation Classes */
+/* Background Image Enhancements */
+.about::before,
+.contact::before,
+.blog::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+        rgba(0, 0, 0, 0.3) 0%, 
+        rgba(220, 20, 60, 0.1) 50%, 
+        rgba(0, 0, 0, 0.3) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.about .container,
+.contact .container,
+.blog .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Add bright red accents to background sections */
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--bright-red), var(--warm-red), var(--bright-red));
+    z-index: 3;
+}
+
+.about::after,
+.contact::after,
+.blog::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--bright-red), var(--warm-red), var(--bright-red));
+    z-index: 3;
+}
+
+/* Decorative Full Circle Background Element - Brick Pattern */
+.decorative-circle {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: 
+        /* Brick texture base */
+        repeating-linear-gradient(
+            0deg,
+            #1a1a1a 0px,
+            #1a1a1a 20px,
+            #2a2a2a 20px,
+            #2a2a2a 22px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            #1a1a1a 0px,
+            #1a1a1a 40px,
+            #2a2a2a 40px,
+            #2a2a2a 42px
+        );
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+    animation: slowRotate 30s linear infinite;
+    overflow: hidden;
+}
+
+.decorative-circle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background: 
+        /* Red diagonal stripes */
+        repeating-linear-gradient(
+            45deg,
+            transparent 0px,
+            transparent 30px,
+            var(--dark-red) 30px,
+            var(--dark-red) 60px,
+            transparent 60px,
+            transparent 90px,
+            var(--bright-red) 90px,
+            var(--bright-red) 120px
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            transparent 0px,
+            transparent 40px,
+            rgba(220, 20, 60, 0.3) 40px,
+            rgba(220, 20, 60, 0.3) 50px
+        );
+    opacity: 0.8;
+}
+
+.decorative-circle::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background: 
+        /* Additional brick pattern overlay */
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 18px,
+            rgba(0, 0, 0, 0.3) 18px,
+            rgba(0, 0, 0, 0.3) 22px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 38px,
+            rgba(0, 0, 0, 0.3) 38px,
+            rgba(0, 0, 0, 0.3) 42px
+        );
+    opacity: 0.6;
+}
+
+/* Alternative brick circle with different pattern */
+.brick-circle {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: 
+        /* Dark brick base */
+        #1a1a1a;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 0;
+    animation: slowRotate 40s linear infinite reverse;
+    overflow: hidden;
+}
+
+.brick-circle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background: 
+        /* Red chevron pattern */
+        repeating-conic-gradient(
+            from 0deg at center,
+            transparent 0deg,
+            var(--dark-red) 20deg,
+            var(--dark-red) 40deg,
+            transparent 40deg,
+            transparent 60deg,
+            var(--bright-red) 60deg,
+            var(--bright-red) 80deg,
+            transparent 80deg,
+            transparent 100deg,
+            var(--dark-red) 100deg,
+            var(--dark-red) 120deg,
+            transparent 120deg
+        );
+    opacity: 0.7;
+    mask: 
+        radial-gradient(
+            circle at center,
+            transparent 20%,
+            black 25%,
+            black 75%,
+            transparent 80%
+        );
+}
+
+.brick-circle::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border-radius: 50%;
+    background: 
+        /* Brick texture overlay */
+        repeating-linear-gradient(
+            15deg,
+            transparent 0px,
+            transparent 8px,
+            rgba(42, 42, 42, 0.8) 8px,
+            rgba(42, 42, 42, 0.8) 10px
+        ),
+        repeating-linear-gradient(
+            105deg,
+            transparent 0px,
+            transparent 8px,
+            rgba(42, 42, 42, 0.8) 8px,
+            rgba(42, 42, 42, 0.8) 10px
+        );
+    opacity: 0.9;
+}
+
+/* Position decorative circles in different sections */
+.hero .decorative-circle {
+    top: 15%;
+    right: -200px;
+    width: 500px;
+    height: 500px;
+    opacity: 0.1;
+}
+
+.hero .brick-circle {
+    top: 60%;
+    right: -100px;
+    width: 250px;
+    height: 250px;
+    opacity: 0.08;
+}
+
+.about .decorative-circle {
+    bottom: -150px;
+    left: -200px;
+    width: 350px;
+    height: 350px;
+    opacity: 0.06;
+    animation-direction: reverse;
+    animation-duration: 45s;
+}
+
+.about .brick-circle {
+    top: -80px;
+    left: -100px;
+    width: 200px;
+    height: 200px;
+    opacity: 0.05;
+}
+
+.gallery .decorative-circle {
+    top: -120px;
+    right: -150px;
+    width: 300px;
+    height: 300px;
+    opacity: 0.04;
+    animation-duration: 35s;
+}
+
+.gallery .brick-circle {
+    bottom: -50px;
+    right: -80px;
+    width: 180px;
+    height: 180px;
+    opacity: 0.03;
+}
+
+@keyframes slowRotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Enhanced Button Styles for Background Sections */
 .animate-on-scroll {
     opacity: 0;
     animation: fadeInUp 0.8s ease forwards;
@@ -66,26 +343,26 @@ body, p, .nav-link, .btn, span, div {
 }
 
 :root {
-    /* CLEAN PROFESSIONAL COLOR PALETTE */
+    /* RED, BLACK & WHITE COLOR PALETTE */
     --black: #000000;                   /* Pure black for text */
     --dark-gray: #333333;               /* Dark gray for secondary text */
     --medium-gray: #666666;             /* Medium gray for muted text */
     --light-gray: #ecf0f1;              /* Very light gray background */
     --pure-white: #ffffff;              /* Clean white */
-    --bright-orange: #ff8c00;           /* Brighter, stronger orange */
-    --warm-orange: #ff6b35;             /* Warm vibrant orange */
-    --dark-orange: #e55a2b;             /* Darker orange for hover */
+    --bright-red: #dc143c;              /* Crimson red - primary accent */
+    --warm-red: #ff1744;                /* Vibrant red */
+    --dark-red: #b71c1c;                /* Dark red for hover */
     --subtle-border: #bdc3c7;           /* Subtle borders */
     
-    /* CLEAN GRADIENTS */
+    /* RED GRADIENTS */
     --gradient-dark: linear-gradient(135deg, #000000 0%, #333333 100%);
     --gradient-light: linear-gradient(135deg, #ffffff 0%, #ecf0f1 100%);
-    --gradient-orange: linear-gradient(135deg, #ff6b35 0%, #e55a2b 100%);
+    --gradient-red: linear-gradient(135deg, #ff1744 0%, #b71c1c 100%);
     
-    /* SEMANTIC ASSIGNMENTS - BLACK TEXT EVERYWHERE */
+    /* SEMANTIC ASSIGNMENTS - BLACK & WHITE TEXT WITH RED ACCENTS */
     --primary-color: var(--black);
     --secondary-color: var(--pure-white);
-    --accent-color: var(--bright-orange);
+    --accent-color: var(--bright-red);
     --text-primary: var(--black);               /* Pure black text */
     --text-secondary: var(--dark-gray);         /* Dark gray secondary */
     --text-muted: var(--medium-gray);           /* Medium gray muted */
@@ -241,13 +518,13 @@ p {
 
 /* Links */
 a {
-    color: var(--bright-orange);
+    color: var(--dark-red);
     text-decoration: none;
     transition: all 0.3s ease;
 }
 
 a:hover {
-    color: var(--warm-orange);
+    color: var(--dark-red);
     text-decoration: underline;
 }
 
@@ -258,34 +535,73 @@ img {
     display: block;
 }
 
-/* Logo styling - using properly sized image */
-.nav-logo .logo-img {
-    height: auto;
-    width: auto;
-    max-width: 60px;
-    object-fit: contain;
-    display: inline-block;
+/* Logo styling - Round logo with background image */
+.nav-logo {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+}
+
+.nav-logo::before {
+    content: '';
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: var(--dark-red);
+    z-index: 1;
     transition: all 0.3s ease;
+    border: 3px solid var(--bright-red);
+    box-shadow: 0 6px 20px rgba(220, 20, 60, 0.4);
 }
 
-.nav-logo .logo-img:hover {
-    animation: wiggle 0.8s ease-in-out;
+.nav-logo:hover::before {
     transform: scale(1.1);
+    background: var(--bright-red);
+    box-shadow: 0 8px 25px rgba(220, 20, 60, 0.6);
 }
 
-/* More specific selector for logo */
-.navbar .nav-logo img.logo-img {
-    height: auto;
-    width: auto;
-    max-width: 60px;
-    object-fit: contain;
-    display: inline-block;
-    transition: all 0.3s ease;
+.navbar .nav-logo .logo-img,
+.navbar .nav-logo img.logo-img,
+.nav-logo .logo-img,
+.nav-logo img {
+    width: 55px !important;
+    height: 55px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    background-color: var(--pure-white) !important;
+    padding: 5px !important;
+    border: 3px solid var(--pure-white) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+    transition: all 0.3s ease !important;
+    display: block !important;
+    position: relative !important;
+    z-index: 3 !important;
+    max-width: none !important;
 }
 
-.navbar .nav-logo img.logo-img:hover {
-    animation: wiggle 0.8s ease-in-out;
-    transform: scale(1.1);
+.navbar .nav-logo .logo-img:hover,
+.navbar .nav-logo img.logo-img:hover,
+.nav-logo .logo-img:hover,
+.nav-logo img:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.8) !important;
+    animation: redPulse 0.8s ease-in-out !important;
+}
+
+/* Scrolled navbar logo adjustments */
+.navbar.scrolled .nav-logo::before {
+    width: 58px;
+    height: 58px;
+}
+
+.navbar.scrolled .nav-logo .logo-img,
+.navbar.scrolled .nav-logo img.logo-img,
+.navbar.scrolled .nav-logo img {
+    width: 48px !important;
+    height: 48px !important;
+    padding: 4px !important;
 }
 
 /* Container */
@@ -315,7 +631,7 @@ img {
 }
 
 .btn:hover {
-    animation: orangePulse 1.5s infinite, float 2s ease-in-out infinite;
+    animation: redPulse 1.5s infinite, float 2s ease-in-out infinite;
     transform: translateY(-3px) scale(1.05);
     transition: all 0.3s ease;
 }
@@ -337,9 +653,9 @@ img {
 }
 
 .btn-primary {
-    background: var(--bright-orange);
+    background: var(--dark-red);
     color: var(--pure-white);
-    border: 2px solid var(--bright-orange);
+    border: 2px solid var(--dark-red);
     font-weight: 600;
     transition: all 0.3s ease;
     font-family: 'Open Sans', sans-serif;
@@ -347,15 +663,15 @@ img {
     letter-spacing: 0.05em;
     padding: 12px 30px;
     font-size: 0.9rem;
-    box-shadow: 0 2px 10px rgba(255, 107, 53, 0.3);
+    box-shadow: 0 2px 10px rgba(183, 28, 28, 0.3);
 }
 
 .btn-primary:hover {
-    background: var(--warm-orange);
+    background: var(--dark-red);
     color: var(--pure-white);
-    border-color: var(--warm-orange);
+    border-color: var(--dark-red);
     transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+    box-shadow: 0 4px 15px rgba(183, 28, 28, 0.4);
 }
 
 .btn-secondary {
@@ -391,18 +707,18 @@ img {
 .contact .btn-outline,
 .aftercare .btn-outline {
     color: var(--pure-white);
-    border: 2px solid var(--bright-orange);
+    border: 2px solid var(--bright-red);
     background: transparent;
 }
 
 .blog .btn-outline:hover,
 .contact .btn-outline:hover,
 .aftercare .btn-outline:hover {
-    background: var(--bright-orange);
+    background: var(--bright-red);
     color: var(--pure-white);
-    border-color: var(--bright-orange);
+    border-color: var(--bright-red);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 140, 0, 0.3);
+    box-shadow: 0 8px 25px rgba(220, 20, 60, 0.3);
     text-shadow: none;
 }
 
@@ -527,9 +843,9 @@ img {
 }
 
 .nav-link:hover {
-    color: var(--bright-orange);
+    color: var(--bright-red);
     transform: scale(1.1);
-    animation: orangeGlow 1.5s infinite;
+    animation: redGlow 1.5s infinite;
 }
 
 .nav-link::before {
@@ -599,12 +915,15 @@ img {
     width: 100%;
     height: 100%;
     z-index: -2;
+    background: url('../assets/images/background.jpg') center/cover no-repeat;
+    background-attachment: fixed;
 }
 
 .hero-background video {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: none; /* Hide video, use background image instead */
 }
 
 .hero-overlay {
@@ -613,7 +932,7 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(10, 10, 10, 0.7);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(220, 20, 60, 0.2));
     z-index: -1;
 }
 
@@ -632,25 +951,25 @@ img {
     font-weight: 700;
     margin-bottom: 30px;
     line-height: 1.2;
-    color: var(--black);
+    color: var(--pure-white);
     letter-spacing: -0.02em;
     text-transform: none;
-    text-shadow: none;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     animation: fadeInUp 1s ease forwards;
 }
 
 .hero-title .highlight {
-    color: var(--bright-orange);
+    color: var(--bright-red);
     font-style: normal;
     font-weight: 700;
-    animation: orangeGlow 3s ease-in-out infinite;
+    animation: redGlow 3s ease-in-out infinite;
 }
 
 .hero-subtitle {
     font-family: 'Open Sans', sans-serif;
     font-size: clamp(1.1rem, 2vw, 1.3rem);
     margin-bottom: 50px;
-    color: var(--black);
+    color: var(--pure-white);
     font-weight: 400;
     letter-spacing: 0;
     line-height: 1.6;
@@ -661,6 +980,7 @@ img {
     animation: fadeInUp 1s ease forwards;
     animation-delay: 0.3s;
     opacity: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .hero-buttons {
@@ -798,7 +1118,7 @@ img {
     transform: translateX(-50%);
     width: 50px;
     height: 1px;
-    background: var(--bright-orange);
+    background: var(--bright-red);
     border-radius: 1px;
     animation: slideInLeft 0.8s ease forwards;
     animation-delay: 0.3s;
@@ -845,7 +1165,7 @@ img {
 .artist-card:hover {
     transform: translateY(-10px) rotateY(5deg);
     box-shadow: var(--shadow-heavy);
-    animation: orangePulse 2s infinite;
+    animation: redPulse 2s infinite;
 }
 
 .artist-image {
@@ -921,7 +1241,7 @@ img {
 }
 
 .artist-specialty {
-    color: var(--bright-orange);
+    color: var(--dark-red);
     font-weight: 600;
     margin-bottom: 15px;
     text-transform: uppercase;
@@ -953,7 +1273,7 @@ img {
 .filter-btn {
     padding: 10px 20px;
     background: transparent;
-    border: 2px solid var(--bright-orange);
+    border: 2px solid var(--bright-red);
     color: var(--black);
     border-radius: var(--border-radius);
     cursor: pointer;
@@ -966,11 +1286,11 @@ img {
 
 .filter-btn:hover,
 .filter-btn.active {
-    background: var(--bright-orange);
-    border-color: var(--bright-orange);
+    background: var(--bright-red);
+    border-color: var(--bright-red);
     color: var(--pure-white);
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(220, 20, 60, 0.3);
 }
 
 .gallery-grid {
@@ -1049,8 +1369,12 @@ img {
 /* About Section */
 .about {
     padding: var(--section-padding);
-    background: var(--background-dark);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(220, 20, 60, 0.2)), url('../assets/images/background1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: var(--text-on-dark);
+    position: relative;
 }
 
 .about .section-title {
@@ -1093,7 +1417,7 @@ img {
 
 .stat h3 {
     font-size: 2.5rem;
-    color: var(--bright-orange);
+    color: var(--dark-red);
     margin-bottom: 10px;
     font-weight: 700;
 }
@@ -1147,14 +1471,14 @@ img {
 .booking-form textarea {
     background: var(--pure-white);
     color: var(--black);
-    border: 2px solid var(--warm-orange);
+    border: 2px solid var(--dark-red);
 }
 
 .booking-form input:focus,
 .booking-form select:focus,
 .booking-form textarea:focus {
-    border-color: var(--bright-orange);
-    box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.2);
+    border-color: var(--dark-red);
+    box-shadow: 0 0 0 3px rgba(183, 28, 28, 0.2);
 }
 
 .form-group {
@@ -1193,7 +1517,7 @@ img {
 .booking-form .form-group textarea {
     background: var(--pure-white);
     color: var(--black);
-    border: 2px solid var(--bright-orange);
+    border: 2px solid var(--dark-red);
     font-weight: 500;
 }
 
@@ -1209,8 +1533,8 @@ img {
 .booking-form .form-group input:focus,
 .booking-form .form-group select:focus,
 .booking-form .form-group textarea:focus {
-    border-color: var(--bright-orange);
-    box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.2);
+    border-color: var(--dark-red);
+    box-shadow: 0 0 0 3px rgba(183, 28, 28, 0.2);
     background: var(--pure-white);
 }
 
@@ -1282,7 +1606,7 @@ img {
     background: var(--background-dark);
     padding: 25px;
     border-radius: var(--border-radius);
-    border-left: 4px solid var(--bright-orange);
+    border-left: 4px solid var(--bright-red);
     color: var(--text-on-dark);
     animation: slideInRight 0.6s ease forwards;
     transition: all 0.3s ease;
@@ -1291,7 +1615,7 @@ img {
 .info-card:hover {
     transform: translateX(10px) scale(1.02);
     border-left-width: 8px;
-    animation: orangeGlow 2s infinite;
+    animation: redGlow 2s infinite;
 }
 
 .info-card h3 {
@@ -1313,7 +1637,7 @@ img {
 
 .info-card li::before {
     content: '•';
-    color: var(--bright-orange);
+    color: var(--dark-red);
     font-weight: bold;
     position: absolute;
     left: 0;
@@ -1353,13 +1677,13 @@ img {
     top: 80px;
     width: 2px;
     height: calc(100% - 30px);
-    background: var(--bright-orange);
+    background: var(--dark-red);
 }
 
 .timeline-marker {
     width: 50px;
     height: 50px;
-    background: var(--bright-orange);
+    background: var(--dark-red);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1393,7 +1717,7 @@ img {
 
 .timeline-content li::before {
     content: '→';
-    color: var(--bright-orange);
+    color: var(--dark-red);
     position: absolute;
     left: 0;
 }
@@ -1452,7 +1776,7 @@ img {
     content: '"';
     font-family: 'Merriweather', serif !important;
     font-size: 3rem;
-    color: var(--bright-orange);
+    color: var(--dark-red);
     float: left;
     line-height: 1;
     margin-right: 10px;
@@ -1463,7 +1787,7 @@ img {
     content: '"';
     font-family: 'Merriweather', serif !important;
     font-size: 3rem;
-    color: var(--bright-orange);
+    color: var(--dark-red);
 }
 
 .testimonial-author {
@@ -1486,7 +1810,7 @@ img {
 }
 
 .author-info span {
-    color: var(--bright-orange);
+    color: var(--dark-red);
     font-size: 0.9rem;
 }
 
@@ -1520,8 +1844,12 @@ img {
 /* Blog Section */
 .blog {
     padding: var(--section-padding);
-    background: var(--background-dark);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(220, 20, 60, 0.1)), url('../assets/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: var(--text-on-dark);
+    position: relative;
 }
 
 .blog .section-title {
@@ -1540,11 +1868,13 @@ img {
 }
 
 .blog-card {
-    background: var(--background-primary);
+    background: rgba(255, 255, 255, 0.95);
     border-radius: var(--border-radius);
     overflow: hidden;
     transition: var(--transition-fast);
     box-shadow: var(--shadow-light);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(220, 20, 60, 0.2);
 }
 
 .blog-card:hover {
@@ -1574,7 +1904,7 @@ img {
     position: absolute;
     top: 15px;
     left: 15px;
-    background: var(--bright-orange);
+    background: var(--bright-red);
     color: var(--pure-white);
     padding: 5px 12px;
     border-radius: 20px;
@@ -1598,7 +1928,7 @@ img {
 }
 
 .blog-content h3 a:hover {
-    color: var(--bright-orange);
+    color: var(--bright-red);
 }
 
 .blog-content p {
@@ -1684,8 +2014,12 @@ img {
 /* Contact Section */
 .contact {
     padding: var(--section-padding);
-    background: var(--background-dark);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(220, 20, 60, 0.2)), url('../assets/images/background2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: var(--text-on-dark);
+    position: relative;
 }
 
 .contact .section-title {
@@ -1709,12 +2043,14 @@ img {
 }
 
 .contact-card {
-    background: var(--background-primary);
+    background: rgba(255, 255, 255, 0.95);
     padding: 30px;
     border-radius: var(--border-radius);
     text-align: center;
     transition: var(--transition-fast);
     box-shadow: var(--shadow-light);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(220, 20, 60, 0.2);
 }
 
 .contact-card:hover {
@@ -1724,7 +2060,7 @@ img {
 
 .contact-icon {
     font-size: 2rem;
-    color: var(--bright-orange);
+    color: var(--bright-red);
     margin-bottom: 20px;
 }
 
@@ -1754,7 +2090,7 @@ img {
     align-items: center;
     justify-content: center;
     color: var(--text-secondary);
-    border: 2px solid var(--bright-orange);
+    border: 2px solid var(--dark-red);
     font-size: 1.1rem;
     font-weight: 500;
 }

@@ -1,31 +1,31 @@
-/* WARM ELEGANCE & GALLERY SOPHISTICATION ANIMATIONS */
+/* MODERN RED & BLACK ANIMATIONS */
 
-/* Modern Bright Orange Animations */
-@keyframes orangePulse {
+/* Modern Red Animations */
+@keyframes redPulse {
     0% {
-        box-shadow: 0 0 5px var(--bright-orange);
+        box-shadow: 0 0 5px var(--bright-red);
         transform: scale(1);
     }
     50% {
-        box-shadow: 0 0 25px var(--bright-orange), 0 0 35px var(--warm-orange);
+        box-shadow: 0 0 25px var(--bright-red), 0 0 35px var(--warm-red);
         transform: scale(1.05);
     }
     100% {
-        box-shadow: 0 0 5px var(--bright-orange);
+        box-shadow: 0 0 5px var(--bright-red);
         transform: scale(1);
     }
 }
 
-@keyframes orangeGlow {
+@keyframes redGlow {
     0% {
-        filter: drop-shadow(0 0 5px rgba(255, 140, 0, 0.3));
+        filter: drop-shadow(0 0 5px rgba(220, 20, 60, 0.3));
     }
     50% {
-        filter: drop-shadow(0 0 20px rgba(255, 140, 0, 0.6))
-                drop-shadow(0 0 35px rgba(255, 107, 53, 0.4));
+        filter: drop-shadow(0 0 20px rgba(220, 20, 60, 0.6))
+                drop-shadow(0 0 35px rgba(255, 23, 68, 0.4));
     }
     100% {
-        filter: drop-shadow(0 0 5px rgba(255, 140, 0, 0.3));
+        filter: drop-shadow(0 0 5px rgba(220, 20, 60, 0.3));
     }
 }
 
