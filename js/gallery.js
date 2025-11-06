@@ -2,118 +2,46 @@
 document.addEventListener('DOMContentLoaded', function() {
     initGallery();
     initGalleryFilters();
-    initGalleryModal();
+    // Modal disabled for pure image grid
 });
 
-// Gallery data (in a real application, this would come from an API)
+// Gallery data (local images available in the repo)
 const galleryData = [
     {
         id: 1,
-        src: 'assets/images/gallery/tattoo1.jpg',
-        alt: 'Realistic Portrait Tattoo',
-        category: 'realism',
-        artist: 'Marcus Rivera',
-        title: 'Portrait Masterpiece',
-        description: 'Hyperrealistic portrait showcasing incredible detail and shading technique.'
+        src: 'assets/images/gallery/Custom_design.JPG',
+        alt: 'Custom Tattoo Design',
+        category: 'color',
+        artist: 'Prabhu D.A',
+        title: 'Custom Design',
+        description: 'A bespoke tattoo concept crafted to tell a personal story.'
     },
     {
         id: 2,
-        src: 'assets/images/gallery/tattoo2.jpg',
-        alt: 'Japanese Dragon Tattoo',
-        category: 'traditional',
-        artist: 'Sakura Chen',
-        title: 'Traditional Dragon',
-        description: 'Classic Japanese dragon design with traditional color palette.'
+        src: 'assets/images/gallery/Sterlie_env.png',
+        alt: 'Studio Work - Fine Line Details',
+        category: 'blackwork',
+        artist: 'Prabhu D.A',
+        title: 'Fine Line Work',
+        description: 'Clean lines and meticulous technique in a sterile environment.'
     },
     {
         id: 3,
-        src: 'assets/images/gallery/tattoo3.jpg',
-        alt: 'Neo-Traditional Rose',
+        src: 'assets/images/gallery/Gemini_Generated_Image_rg7vucrg7vucrg7v.png',
+        alt: 'Studio Artwork',
         category: 'neo-traditional',
-        artist: 'Alex Thompson',
-        title: 'Vibrant Rose Design',
-        description: 'Modern interpretation of classic rose tattoo with bold colors.'
+        artist: 'Prabhu D.A',
+        title: 'Studio Artwork',
+        description: 'Conceptual art direction showcased in-studio.'
     },
     {
         id: 4,
-        src: 'assets/images/gallery/tattoo4.jpg',
-        alt: 'Geometric Blackwork',
-        category: 'blackwork',
-        artist: 'Marcus Rivera',
-        title: 'Sacred Geometry',
-        description: 'Intricate geometric patterns creating a mesmerizing mandala design.'
-    },
-    {
-        id: 5,
-        src: 'assets/images/gallery/tattoo5.jpg',
-        alt: 'Colorful Watercolor Tattoo',
-        category: 'color',
-        artist: 'Alex Thompson',
-        title: 'Watercolor Butterfly',
-        description: 'Vibrant watercolor-style butterfly with flowing, artistic elements.'
-    },
-    {
-        id: 6,
-        src: 'assets/images/gallery/tattoo6.jpg',
-        alt: 'Realistic Eye Tattoo',
+        src: 'assets/images/gallery/recognized aritist.png',
+        alt: 'Recognized Artist Feature',
         category: 'realism',
-        artist: 'Marcus Rivera',
-        title: 'The Window to Soul',
-        description: 'Incredibly detailed realistic eye with perfect shading and highlights.'
-    },
-    {
-        id: 7,
-        src: 'assets/images/gallery/tattoo7.jpg',
-        alt: 'Traditional Anchor',
-        category: 'traditional',
-        artist: 'Sakura Chen',
-        title: 'Classic Anchor',
-        description: 'Traditional sailor tattoo design with bold lines and classic colors.'
-    },
-    {
-        id: 8,
-        src: 'assets/images/gallery/tattoo8.jpg',
-        alt: 'Neo-Traditional Wolf',
-        category: 'neo-traditional',
-        artist: 'Alex Thompson',
-        title: 'Mystical Wolf',
-        description: 'Modern wolf design incorporating traditional elements with contemporary style.'
-    },
-    {
-        id: 9,
-        src: 'assets/images/gallery/tattoo9.jpg',
-        alt: 'Tribal Blackwork',
-        category: 'blackwork',
-        artist: 'Marcus Rivera',
-        title: 'Tribal Fusion',
-        description: 'Modern interpretation of tribal designs with flowing black patterns.'
-    },
-    {
-        id: 10,
-        src: 'assets/images/gallery/tattoo10.jpg',
-        alt: 'Colorful Phoenix',
-        category: 'color',
-        artist: 'Alex Thompson',
-        title: 'Rising Phoenix',
-        description: 'Magnificent phoenix rising with brilliant reds, oranges, and golds.'
-    },
-    {
-        id: 11,
-        src: 'assets/images/gallery/tattoo11.jpg',
-        alt: 'Portrait of Woman',
-        category: 'realism',
-        artist: 'Marcus Rivera',
-        title: 'Elegant Portrait',
-        description: 'Stunning realistic portrait showcasing feminine beauty and grace.'
-    },
-    {
-        id: 12,
-        src: 'assets/images/gallery/tattoo12.jpg',
-        alt: 'Japanese Koi Fish',
-        category: 'traditional',
-        artist: 'Sakura Chen',
-        title: 'Swimming Koi',
-        description: 'Traditional Japanese koi fish swimming through stylized water.'
+        artist: 'Prabhu D.A',
+        title: 'Recognized Artist',
+        description: 'Celebrating recognized artistry with years of experience.'
     }
 ];
 
@@ -123,6 +51,11 @@ const itemsPerPage = 8;
 let filteredGallery = [...galleryData];
 
 function initGallery() {
+    const galleryGrid = document.getElementById('gallery-grid');
+    // If the grid already has static items, skip dynamic loading
+    if (galleryGrid && galleryGrid.children.length > 0) {
+        return;
+    }
     loadGalleryItems();
     initLoadMoreButton();
 }
@@ -191,31 +124,10 @@ function createGalleryItem(item, index) {
     galleryItem.className = 'gallery-item';
     galleryItem.style.setProperty('--item-index', index);
     galleryItem.setAttribute('data-category', item.category);
-    
+    // Pure image (no overlay, no title/artist, no modal)
     galleryItem.innerHTML = `
         <img src="${item.src}" alt="${item.alt}" loading="lazy">
-        <div class="gallery-overlay">
-            <div class="gallery-info">
-                <h4>${item.title}</h4>
-                <p>by ${item.artist}</p>
-                <button class="gallery-view-btn" data-item-id="${item.id}">
-                    <i class="fas fa-search-plus"></i>
-                </button>
-            </div>
-        </div>
     `;
-    
-    // Add click event for modal
-    const viewBtn = galleryItem.querySelector('.gallery-view-btn');
-    viewBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        openGalleryModal(item);
-    });
-    
-    galleryItem.addEventListener('click', () => {
-        openGalleryModal(item);
-    });
-    
     return galleryItem;
 }
 

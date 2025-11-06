@@ -1,57 +1,54 @@
 /* Service Worker for Performance and Caching */
 
-const CACHE_NAME = 'bobs-tattoo-v4';
+// Bump this to force a fresh SW install and cache reset
+const CACHE_NAME = 'bobs-tattoo-v21';
+
+// Cache only local essentials to avoid CORS issues
 const urlsToCache = [
     '/',
-    '/css/styles.css?v=20241029-4',
-    '/css/animations.css?v=20241029-4',
-    '/css/responsive.css?v=20241029-4',
+    '/index.html',
+    '/css/styles-complete.css?v=complete-37',
+    '/css/animations.css?v=20241029-6',
+    '/css/responsive.css?v=20241029-6',
     '/js/main.js',
-    '/js/gallery.js',
+    '/js/gallery.js?v=20241031-1',
     '/js/booking.js',
     '/js/instagram.js',
-    '/assets/images/hero-bg.jpg',
-    '/assets/images/artist1.jpg',
-    '/assets/images/artist2.jpg',
-    '/assets/images/artist3.jpg',
     '/assets/images/background.jpg',
-    '/assets/images/Bobs_Logo_Header.jpg',
-    'https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap',
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
+    '/assets/images/Bobs_Logo_Header.jpg'
 ];
 
-// Install event - cache resources
-self.addEventListener('install', function(event) {
+// Install event - cache resources and activate immediately
+self.addEventListener('install', event => {
     event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then(function(cache) {
-                return cache.addAll(urlsToCache);
-            })
+        caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
     );
+    self.skipWaiting();
 });
 
-// Fetch event - serve cached content
-self.addEventListener('fetch', function(event) {
+// Network-first strategy with cache fallback (prevents stale assets)
+self.addEventListener('fetch', event => {
     event.respondWith(
-        caches.match(event.request)
-            .then(function(response) {
-                // Return cached version or fetch from network
-                return response || fetch(event.request);
+        fetch(event.request)
+            .then(response => {
+                const clone = response.clone();
+                caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone)).catch(() => {});
+                return response;
             })
+            .catch(() => caches.match(event.request))
     );
 });
 
-// Activate event - clean up old caches
-self.addEventListener('activate', function(event) {
+// Activate event - clean up old caches and take control immediately
+self.addEventListener('activate', event => {
     event.waitUntil(
-        caches.keys().then(function(cacheNames) {
-            return Promise.all(
-                cacheNames.map(function(cacheName) {
-                    if (cacheName !== CACHE_NAME) {
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
-        })
+        caches.keys().then(cacheNames => Promise.all(
+            cacheNames.map(cacheName => {
+                if (cacheName !== CACHE_NAME) {
+                    return caches.delete(cacheName);
+                }
+            })
+        ))
     );
+    self.clients.claim();
 });
