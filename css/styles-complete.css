@@ -276,22 +276,18 @@ img {
 
 .nav-logo img,
 .logo-img {
-    width: 96px; /* enlarged logo */
+    width: 96px; /* logo size */
     height: 96px;
     border-radius: 50%;
     object-fit: cover;
-    background: #ffffff; /* keep white, remove grey */
+    background: transparent; /* respect PNG transparency */
     padding: 0;
-    /* Remove outer black border: only inner circle from the image remains */
     border: none;
     box-shadow: none;
     position: relative;
     z-index: 1;
-    /* Zoom further so the outer ring is excluded */
-    transform: scale(3.1);
-    transform-origin: center center;
-    /* Clip slightly inside the ring to remove it entirely */
-    clip-path: circle(42px at center);
+    transform: none;
+    clip-path: none;
 }
 
 .nav-logo:hover {
@@ -1826,5 +1822,22 @@ section {
     width: 200px;
     height: 200px;
     opacity: 0.03;
+}
+
+/* Aftercare decorative shapes */
+.aftercare .decorative-circle {
+    top: -100px;
+    left: -180px;
+    width: 320px;
+    height: 320px;
+    opacity: 0.06; /* slightly stronger for visibility on dark */
+}
+
+.aftercare .brick-circle {
+    bottom: -80px;
+    right: -120px;
+    width: 220px;
+    height: 220px;
+    opacity: 0.05;
 }
 

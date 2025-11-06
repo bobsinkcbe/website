@@ -1,13 +1,14 @@
 /* Service Worker for Performance and Caching */
 
 // Bump this to force a fresh SW install and cache reset
-const CACHE_NAME = 'bobs-tattoo-v21';
+const CACHE_NAME = 'bobs-tattoo-v24';
 
 // Cache only local essentials to avoid CORS issues
 const urlsToCache = [
     '/',
     '/index.html',
-    '/css/styles-complete.css?v=complete-37',
+    '/css/styles-complete.css?v=complete-38',
+    '/assets/images/circular-image (1).png',
     '/css/animations.css?v=20241029-6',
     '/css/responsive.css?v=20241029-6',
     '/js/main.js',
