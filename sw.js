@@ -1,22 +1,24 @@
 /* Service Worker for Performance and Caching */
 
 // Bump this to force a fresh SW install and cache reset
-const CACHE_NAME = 'bobs-tattoo-v24';
+const CACHE_NAME = 'bobs-tattoo-v57';
 
 // Cache only local essentials to avoid CORS issues
 const urlsToCache = [
     '/',
     '/index.html',
     '/css/styles-complete.css?v=complete-38',
-    '/assets/images/circular-image (1).png',
     '/css/animations.css?v=20241029-6',
     '/css/responsive.css?v=20241029-6',
+    '/assets/instagram.json',
     '/js/main.js',
     '/js/gallery.js?v=20241031-1',
     '/js/booking.js',
-    '/js/instagram.js',
+    '/js/instagram.js?v=20251106-tiles4',
     '/assets/images/background.jpg',
-    '/assets/images/Bobs_Logo_Header.jpg'
+    '/assets/images/gallery/circular-image (2).png',
+    '/blog/notattooimage.png',
+    
 ];
 
 // Install event - cache resources and activate immediately

@@ -36,7 +36,7 @@ const galleryData = [
     },
     {
         id: 4,
-        src: 'assets/images/gallery/recognized aritist.png',
+        src: 'blog/notattooimage.png',
         alt: 'Recognized Artist Feature',
         category: 'realism',
         artist: 'Prabhu D.A',

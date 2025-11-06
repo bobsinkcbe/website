@@ -1,3 +1,33 @@
+// One-time cache reset to ensure users receive the latest assets
+(function() {
+    const CLEAR_VERSION = '2025-11-06-2';
+    const KEY = 'bobs-cache-cleared';
+    try {
+        const stored = localStorage.getItem(KEY);
+        const force = new URLSearchParams(location.search).has('clear-cache');
+        if (stored !== CLEAR_VERSION || force) {
+            // Delete all caches
+            if ('caches' in window) {
+                caches.keys().then(keys => Promise.all(keys.map(k => caches.delete(k)))).catch(() => {});
+            }
+            // Unregister any existing service workers
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations()
+                    .then(regs => Promise.all(regs.map(r => r.unregister())))
+                    .catch(() => {});
+            }
+            localStorage.setItem(KEY, CLEAR_VERSION);
+            // Small delay to allow unregister/delete to settle, then reload once
+            setTimeout(() => {
+                try { history.replaceState(null, '', location.pathname); } catch(e) {}
+                location.reload();
+            }, 200);
+        }
+    } catch (e) {
+        console.warn('Cache reset skipped:', e);
+    }
+})();
+
 // Main JavaScript functionality
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all components
@@ -10,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initFormValidation();
     initLazyLoading();
     initPerformanceOptimizations();
+    initCategoryFilters();
 });
 
 // Preloader
@@ -399,6 +430,36 @@ function initPerformanceOptimizations() {
         }, 16); // ~60fps
     });
     
+
+// Categories -> filter static gallery items
+function initCategoryFilters() {
+    const categoryCards = document.querySelectorAll('.category-card');
+    if (!categoryCards.length) return;
+
+    categoryCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Allow smooth scroll to gallery if needed
+            const category = this.getAttribute('data-category');
+            // Delay filter to after scroll start
+            setTimeout(() => filterStaticGallery(category), 50);
+        });
+    });
+}
+
+function filterStaticGallery(category) {
+    const items = document.querySelectorAll('#gallery-grid .gallery-item');
+    if (!items.length) return;
+
+    if (!category || category === 'all') {
+        items.forEach(el => el.style.display = '');
+        return;
+    }
+
+    items.forEach(el => {
+        const cat = el.getAttribute('data-category') || 'uncategorized';
+        el.style.display = (cat === category) ? '' : 'none';
+    });
+}
     // Preload critical images
     const criticalImages = [
         'assets/images/hero-bg.jpg',

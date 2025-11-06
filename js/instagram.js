@@ -7,133 +7,12 @@ document.addEventListener('DOMContentLoaded', function() {
 const instagramConfig = {
     username: 'bobs_tattoo',
     postsToShow: 12,
-    accessToken: 'YOUR_INSTAGRAM_ACCESS_TOKEN', // Replace with actual token
-    refreshInterval: 300000 // 5 minutes
+    accessToken: 'YOUR_INSTAGRAM_ACCESS_TOKEN', // Not used for embed option
+    refreshInterval: 300000, // 5 minutes
+    useEmbeds: true, // Can be used as fallback, but we'll prefer tiles from permalinks
 };
 
-// Mock Instagram data (replace with actual API integration)
-const mockInstagramPosts = [
-    {
-        id: '1',
-        media_url: 'assets/images/instagram/post1.jpg',
-        caption: 'Fresh ink by Marcus! This realistic portrait took 8 hours of detailed work. #realism #portrait #tattoo',
-        media_type: 'IMAGE',
-        permalink: 'https://instagram.com/p/example1',
-        timestamp: '2024-10-25T10:00:00Z',
-        like_count: 245,
-        comments_count: 18
-    },
-    {
-        id: '2',
-        media_url: 'assets/images/instagram/post2.jpg',
-        caption: 'Traditional Japanese dragon by Sakura Chen. The detail in the scales is incredible! #japanese #traditional #dragon',
-        media_type: 'IMAGE',
-        permalink: 'https://instagram.com/p/example2',
-        timestamp: '2024-10-24T15:30:00Z',
-        like_count: 312,
-        comments_count: 25
-    },
-    {
-        id: '3',
-        media_url: 'assets/images/instagram/post3.jpg',
-        caption: 'Neo-traditional rose sleeve in progress by Alex Thompson. Can\'t wait to see the final result! #neotrad #rose #sleeve',
-        media_type: 'IMAGE',
-        permalink: 'https://instagram.com/p/example3',
-        timestamp: '2024-10-23T12:15:00Z',
-        like_count: 189,
-        comments_count: 12
-    },
-    {
-        id: '4',
-        media_url: 'assets/images/instagram/post4.jpg',
-        caption: 'Geometric mandala finished today! The symmetry is absolutely perfect ✨ #geometric #mandala #blackwork',
-        media_type: 'IMAGE',
-        permalink: 'https://instagram.com/p/example4',
-        timestamp: '2024-10-22T09:45:00Z',
-        like_count: 167,
-        comments_count: 8
-    },
-    {
-        id: '5',
-        media_url: 'assets/images/instagram/post5.jpg',
-        caption: 'Watercolor phoenix rising from the ashes. The color blending is phenomenal! 🔥 #watercolor #phoenix #color',
-        media_type: 'IMAGE',
-        permalink: 'https://instagram.com/p/example5',
-        timestamp: '2024-10-21T16:20:00Z',
-        like_count: 298,
-        comments_count: 22
-    },
-    {
-        id: '6',
-        media_url: 'assets/images/instagram/post6.jpg',
-        caption: 'Behind the scenes: Marcus working on another realistic masterpiece. The concentration is real! #behindthescenes #artist',
-        media_type: 'IMAGE',
-        permalink: 'https://instagram.com/p/example6',
-        timestamp: '2024-10-20T11:10:00Z',
-        like_count: 156,
-        comments_count: 15
-    },
-    {
-        id: '7',
-        media_url: 'assets/images/instagram/post7.jpg',
-        caption: 'Traditional anchor with rope details. Classic sailor tattoo never goes out of style ⚓ #traditional #anchor #sailor',
-        media_type: 'IMAGE',
-        permalink: 'https://instagram.com/p/example7',
-        timestamp: '2024-10-19T14:30:00Z',
-        like_count: 134,
-        comments_count: 9
-    },
-    {
-        id: '8',
-        media_url: 'assets/images/instagram/post8.jpg',
-        caption: 'Neo-traditional wolf with sacred geometry elements. The combination is stunning! 🐺 #neotrad #wolf #geometry',
-        media_type: 'IMAGE',
-        permalink: 'https://instagram.com/p/example8',
-        timestamp: '2024-10-18T13:45:00Z',
-        like_count: 221,
-        comments_count: 16
-    },
-    {
-        id: '9',
-        media_url: 'assets/images/instagram/post9.jpg',
-        caption: 'Fresh blackwork tribal design. Bold lines and perfect execution by our team! #blackwork #tribal #bold',
-        media_type: 'IMAGE',
-        permalink: 'https://instagram.com/p/example9',
-        timestamp: '2024-10-17T10:20:00Z',
-        like_count: 178,
-        comments_count: 11
-    },
-    {
-        id: '10',
-        media_url: 'assets/images/instagram/post10.jpg',
-        caption: 'Colorful koi fish swimming upstream. The gradient work is absolutely beautiful! 🐟 #koi #color #japanese',
-        media_type: 'IMAGE',
-        permalink: 'https://instagram.com/p/example10',
-        timestamp: '2024-10-16T17:15:00Z',
-        like_count: 267,
-        comments_count: 19
-    },
-    {
-        id: '11',
-        media_url: 'assets/images/instagram/post11.jpg',
-        caption: 'Portrait session with incredible detail work. Every line tells a story ✨ #portrait #realism #detail',
-        media_type: 'IMAGE',
-        permalink: 'https://instagram.com/p/example11',
-        timestamp: '2024-10-15T12:00:00Z',
-        like_count: 203,
-        comments_count: 14
-    },
-    {
-        id: '12',
-        media_url: 'assets/images/instagram/post12.jpg',
-        caption: 'Studio vibes tonight! The team is working on some amazing pieces 🎨 #studio #team #tattoolife',
-        media_type: 'IMAGE',
-        permalink: 'https://instagram.com/p/example12',
-        timestamp: '2024-10-14T19:30:00Z',
-        like_count: 145,
-        comments_count: 20
-    }
-];
+// Removed legacy mock Instagram data to avoid shipping unused assets.
 
 let instagramPosts = [];
 let isLoading = false;
@@ -145,25 +24,66 @@ function initInstagramFeed() {
     // Show loading state
     showInstagramLoading();
     
-    // Load Instagram posts
+    // Load Instagram posts (embeds first, then fallback to mock)
     loadInstagramPosts();
     
     // Set up periodic refresh
     setInterval(refreshInstagramFeed, instagramConfig.refreshInterval);
 }
 
-function loadInstagramPosts() {
+async function loadInstagramPosts() {
     if (isLoading) return;
     
     isLoading = true;
-    
-    // In a real application, this would make an API call to Instagram
-    // For demo purposes, we'll use mock data
-    setTimeout(() => {
-        instagramPosts = mockInstagramPosts.slice(0, instagramConfig.postsToShow);
-        renderInstagramFeed();
+
+    // Try to load local permalinks for official Instagram embeds
+    let permalinks = [];
+    let tileItems = [];
+    try {
+        const res = await fetch('assets/instagram.json?cb=' + Date.now());
+        if (res.ok) {
+            const data = await res.json();
+            if (Array.isArray(data)) {
+                // Determine if array of strings (permalinks) or objects ({url, image})
+                if (data.length && typeof data[0] === 'string') {
+                    permalinks = data;
+                } else if (data.length && typeof data[0] === 'object') {
+                    tileItems = data.filter(x => x && x.url && x.image);
+                }
+            } else if (data) {
+                if (Array.isArray(data.permalinks)) permalinks = data.permalinks;
+                if (Array.isArray(data.items)) {
+                    // Normalize items from workflow (may include id/ts)
+                    tileItems = data.items
+                      .filter(x => x && (x.image || x.media_url) && (x.url || x.permalink))
+                      .map(x => ({ image: x.image || x.media_url, url: x.url || x.permalink }));
+                }
+            }
+        }
+    } catch (e) {
+        // ignore and fallback
+    }
+
+    if (tileItems.length > 0) {
+        // Show all tiles in scrolling mode
+        renderInstagramTiles(tileItems);
         isLoading = false;
-    }, 1000);
+        return;
+    }
+
+    // Prefer horizontal tiles using Instagram-hosted preview images derived from permalinks
+    if (permalinks.length > 0) {
+        const itemsFromPermalinks = permalinks
+            .slice(0, instagramConfig.postsToShow)
+            .map(url => ({ url, image: permalinkToImage(url, 'l') }));
+        renderInstagramTiles(itemsFromPermalinks);
+        isLoading = false;
+        return;
+    }
+
+    // Do NOT fallback to mock images; show a clean message instead
+    renderNoInstagramPosts();
+    isLoading = false;
 }
 
 function showInstagramLoading() {
@@ -267,6 +187,148 @@ function renderInstagramFeed() {
     
     // Animate posts in
     animateInstagramPosts();
+}
+
+function renderInstagramTiles(items) {
+    const instagramGrid = document.getElementById('instagram-grid');
+    instagramGrid.innerHTML = '';
+
+    // Make it a horizontal scroller
+    instagramGrid.classList.add('instagram-scroll');
+
+    items.forEach((item, index) => {
+        const tile = document.createElement('div');
+        tile.className = 'instagram-tile';
+        tile.style.setProperty('--item-index', index);
+
+        const a = document.createElement('a');
+        a.href = item.url;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.ariaLabel = 'Open on Instagram';
+
+        const img = document.createElement('img');
+        img.alt = 'Instagram post';
+        img.loading = 'lazy';
+
+        // Try multiple image sizes; if all fail, fallback to official embed
+        const sizes = ['l', 'm', 't'];
+        let attempt = 0;
+        const tryNext = () => {
+            if (attempt < sizes.length) {
+                img.src = permalinkToImage(item.url, sizes[attempt++]);
+            } else {
+                // Fallback to official embed inside the scroller to ensure content shows
+                const grid = document.getElementById('instagram-grid');
+                grid.classList.add('embeds');
+                const embedWrap = document.createElement('div');
+                embedWrap.className = 'instagram-post embed';
+                embedWrap.style.flex = '0 0 auto';
+
+                const block = document.createElement('blockquote');
+                block.className = 'instagram-media';
+                block.setAttribute('data-instgrm-permalink', item.url);
+                block.setAttribute('data-instgrm-version', '14');
+                block.style.background = 'transparent';
+                block.style.border = '0';
+                block.style.margin = '0 auto';
+                block.style.width = '100%';
+
+                embedWrap.appendChild(block);
+                tile.replaceWith(embedWrap);
+                ensureInstagramEmbedScript();
+            }
+        };
+        img.addEventListener('error', tryNext);
+        tryNext();
+
+        a.appendChild(img);
+        tile.appendChild(a);
+        instagramGrid.appendChild(tile);
+    });
+}
+
+function renderInstagramEmbeds(permalinks) {
+    const instagramGrid = document.getElementById('instagram-grid');
+    instagramGrid.innerHTML = '';
+
+    // Grid embeds (kept as fallback; default path uses tiles now)
+    instagramGrid.classList.remove('instagram-scroll', 'embeds');
+
+    permalinks.forEach((url, index) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'instagram-post embed';
+        wrapper.style.setProperty('--item-index', index);
+
+        // No special sizing here; grid fallback
+
+        const block = document.createElement('blockquote');
+        block.className = 'instagram-media';
+        block.setAttribute('data-instgrm-permalink', url);
+        block.setAttribute('data-instgrm-version', '14');
+        block.style.background = 'transparent';
+        block.style.border = '0';
+        block.style.margin = '0 auto';
+        block.style.maxWidth = '540px';
+        block.style.width = '100%';
+
+        wrapper.appendChild(block);
+        instagramGrid.appendChild(wrapper);
+    });
+
+    ensureInstagramEmbedScript();
+}
+
+function ensureInstagramEmbedScript() {
+    function process() {
+        if (window.instgrm && window.instgrm.Embeds && window.instgrm.Embeds.process) {
+            window.instgrm.Embeds.process();
+        }
+    }
+
+    if (window.instgrm && window.instgrm.Embeds) {
+        process();
+        return;
+    }
+
+    // Load script once
+    if (!document.querySelector('script[src*="instagram.com/embed.js"]')) {
+        const s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.instagram.com/embed.js';
+        s.onload = process;
+        document.body.appendChild(s);
+    } else {
+        // Script present but not ready yet
+        setTimeout(process, 500);
+    }
+}
+
+function renderNoInstagramPosts() {
+    const instagramGrid = document.getElementById('instagram-grid');
+    if (!instagramGrid) return;
+    instagramGrid.classList.remove('instagram-scroll');
+    instagramGrid.innerHTML = `
+        <div class="instagram-error" style="grid-column: 1 / -1; text-align: center; padding: 30px; border-radius: var(--border-radius); background: var(--background-secondary);">
+            <h4 style="margin-bottom: 10px;">Instagram posts unavailable</h4>
+            <p style="color: var(--text-secondary); margin-bottom: 15px;">We couldn't load posts right now.</p>
+            <a href="https://instagram.com/${instagramConfig.username}" target="_blank" class="btn btn-primary">View on Instagram</a>
+        </div>
+    `;
+}
+
+// Build an image URL from an Instagram permalink by extracting the shortcode
+function permalinkToImage(url, size = 'l') {
+    try {
+        // Accept /p/, /reel/, /tv/ formats
+        const m = url.match(/instagram\.com\/(?:p|reel|tv)\/([^\/?#]+)/i);
+        const code = m && m[1] ? m[1] : '';
+        if (!code) return 'https://picsum.photos/400/400?random=9999';
+        // This endpoint redirects to the CDN image; works fine as <img src>
+        return `https://www.instagram.com/p/${code}/media/?size=${size}`;
+    } catch (e) {
+        return 'https://picsum.photos/400/400?random=9999';
+    }
 }
 
 function createInstagramPost(post, index) {
