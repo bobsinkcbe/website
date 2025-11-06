@@ -1,6 +1,6 @@
 // One-time cache reset to ensure users receive the latest assets
 (function() {
-    const CLEAR_VERSION = '2025-11-06-2';
+    const CLEAR_VERSION = '2025-11-07-17';
     const KEY = 'bobs-cache-cleared';
     try {
         const stored = localStorage.getItem(KEY);
@@ -41,21 +41,31 @@ document.addEventListener('DOMContentLoaded', function() {
     initLazyLoading();
     initPerformanceOptimizations();
     initCategoryFilters();
+    // Hide category tiles that currently have no images in the manifest
+    initCategoryAvailability();
 });
 
 // Preloader
 function initPreloader() {
     const preloader = document.getElementById('preloader');
-    
-    window.addEventListener('load', function() {
+    // If there's no preloader element on the page, skip safely.
+    if (!preloader) return;
+    // Fallback: hide preloader even if 'load' is delayed by external assets
+    const hidePreloader = () => {
+        preloader.style.opacity = '0';
         setTimeout(() => {
-            preloader.style.opacity = '0';
-            setTimeout(() => {
-                preloader.style.display = 'none';
-                document.body.style.overflow = 'visible';
-            }, 500);
-        }, 1000);
+            preloader.style.display = 'none';
+            document.body.style.overflow = 'visible';
+        }, 500);
+    };
+
+    // Hide shortly after the real load
+    window.addEventListener('load', function() {
+        setTimeout(hidePreloader, 600);
     });
+
+    // Safety timeout in case 'load' is delayed or blocked
+    setTimeout(hidePreloader, 4000);
 }
 
 // Navigation functionality
@@ -429,7 +439,9 @@ function initPerformanceOptimizations() {
             }
         }, 16); // ~60fps
     });
-    
+}
+
+// END initPerformanceOptimizations
 
 // Categories -> filter static gallery items
 function initCategoryFilters() {
@@ -460,12 +472,108 @@ function filterStaticGallery(category) {
         el.style.display = (cat === category) ? '' : 'none';
     });
 }
-    // Preload critical images
+
+// Hide empty categories based on gallery manifest
+function initCategoryAvailability() {
+    try {
+        fetch('/assets/gallery-manifest.json?v=' + Date.now(), { cache: 'no-store' })
+            .then(res => res.ok ? res.json() : null)
+            .then(manifest => {
+                const catsFromManifest = manifest && manifest.categories ? manifest.categories : null;
+                const cards = document.querySelectorAll('.category-card');
+                // Build a simple lookup of first image per category
+                const firstByCat = {};
+                if (catsFromManifest) {
+                    Object.keys(catsFromManifest).forEach(cat => {
+                        const arr = catsFromManifest[cat] || [];
+                        if (arr.length) firstByCat[cat] = arr[0];
+                    });
+                }
+                // Find a decent default image for the "All" card
+                const allDefault = Object.values(firstByCat)[0] || '/blog/notattooimage.png';
+                cards.forEach(card => {
+                    const cat = card.getAttribute('data-category');
+                    if (!cat) return;
+                    if (cat === 'all') {
+                        // Ensure an <img> thumb exists
+                        ensureCategoryThumb(card, allDefault);
+                        setBgFallback(card, allDefault);
+                        return;
+                    }
+                    const arr = catsFromManifest ? catsFromManifest[cat] : null;
+                    if (arr && arr.length) {
+                        ensureCategoryThumb(card, arr[0]);
+                        setBgFallback(card, arr[0]);
+                    } else {
+                        // Try a directory discovery fallback (works on local dev servers)
+                        discoverFirstFromDirectories(cat).then(src => {
+                            if (src) {
+                                ensureCategoryThumb(card, src);
+                                setBgFallback(card, src);
+                            } else {
+                                // Hide tiles with no images to avoid dead-ends
+                                card.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            })
+            .catch(() => {});
+    } catch (_) { /* ignore */ }
+}
+
+function ensureCategoryThumb(card, src) {
+    try {
+        let img = card.querySelector('img.bg-img');
+        if (!img) {
+            img = document.createElement('img');
+            img.className = 'bg-img';
+            img.alt = '';
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            img.onerror = function() {
+                this.onerror = null;
+                this.src = '/blog/notattooimage.png';
+            };
+            card.prepend(img); // place behind gradient and title
+        }
+        img.src = encodeURI(src);
+    } catch (_) { /* ignore */ }
+}
+
+function setBgFallback(card, src) {
+    try {
+        card.style.backgroundImage = `url('${encodeURI(src)}')`;
+        card.style.backgroundSize = 'cover';
+        card.style.backgroundPosition = 'center';
+    } catch (_) { /* ignore */ }
+}
+
+async function discoverFirstFromDirectories(cat) {
+    const aliasMap = {
+        fineline: ['fineline','thineline'],
+        big: ['big','BIG','buddha']
+    };
+    const folders = aliasMap[cat] || [cat];
+    const exts = ['.jpg','.jpeg','.png','.webp','.gif','.JPG','.JPEG','.PNG','.WEBP','.GIF'];
+    const isImage = href => exts.some(ext => href.endsWith(ext));
+    for (const folder of folders) {
+        try {
+            const resp = await fetch(`/assets/images/gallery/${folder}/`, { cache: 'no-store' });
+            if (!resp.ok) continue;
+            const html = await resp.text();
+            const hrefs = Array.from(html.matchAll(/href=\"([^\"]+)\"/g)).map(m => m[1]);
+            const first = hrefs.find(isImage);
+            if (first) return `/assets/images/gallery/${folder}/${first}`;
+        } catch (_) { /* ignore */ }
+    }
+    return null;
+}
+    // Preload only existing background images to avoid 404 noise
     const criticalImages = [
-        'assets/images/hero-bg.jpg',
-        'assets/images/artist1.jpg',
-        'assets/images/artist2.jpg',
-        'assets/images/artist3.jpg'
+        'assets/images/background.jpg',
+        'assets/images/background1.jpg',
+        'assets/images/background2.jpg'
     ];
     
     criticalImages.forEach(src => {
@@ -485,7 +593,7 @@ function filterStaticGallery(category) {
                 });
         });
     }
-}
+
 
 // Utility functions
 function debounce(func, wait, immediate) {

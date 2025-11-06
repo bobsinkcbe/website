@@ -1,0 +1,47 @@
+{
+  "generatedAt": "2025-11-06T17:59:39.513139+00:00",
+  "categories": {
+    "animal": [
+      "/assets/images/gallery/animal/C0CA87EB-0D75-4708-88E5-8B3C0786C62B (1).jpg",
+      "/assets/images/gallery/animal/IMG_0623.JPG"
+    ],
+    "big": [
+      "/assets/images/gallery/big/1.jpg",
+      "/assets/images/gallery/big/2.jpg",
+      "/assets/images/gallery/big/3.jpg",
+      "/assets/images/gallery/big/4.jpg",
+      "/assets/images/gallery/BIG/1.jpg",
+      "/assets/images/gallery/BIG/2.jpg",
+      "/assets/images/gallery/BIG/3.jpg",
+      "/assets/images/gallery/BIG/4.jpg"
+    ],
+    "couples": [
+      "/assets/images/gallery/couples/couple1.JPG",
+      "/assets/images/gallery/couples/couple2.JPG",
+      "/assets/images/gallery/couples/couple3.JPG",
+      "/assets/images/gallery/couples/couple4.JPG"
+    ],
+    "realism": [],
+    "religious": [],
+    "sleeve": [
+      "/assets/images/gallery/sleeve/B4F73E17-955D-4888-8744-77011583419C (1).jpg",
+      "/assets/images/gallery/sleeve/IMG_5864.JPG",
+      "/assets/images/gallery/sleeve/IMG_6591.JPG"
+    ],
+    "small": [
+      "/assets/images/gallery/small/small2.JPG",
+      "/assets/images/gallery/small/small3.JPG",
+      "/assets/images/gallery/small/small4.JPG",
+      "/assets/images/gallery/small/small5.JPG"
+    ],
+    "students_work": [
+      "/assets/images/gallery/students_work/student1.JPG",
+      "/assets/images/gallery/students_work/student2.JPG",
+      "/assets/images/gallery/students_work/student3.JPG",
+      "/assets/images/gallery/students_work/student4.JPG"
+    ],
+    "fineline": [
+      "/assets/images/gallery/fineline/fineline.JPG"
+    ]
+  }
+}

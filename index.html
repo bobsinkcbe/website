@@ -19,67 +19,44 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Google Fonts - Clean & Readable -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Decorative fallback for logo wordmark (approximate to pasted font) -->
-    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
-    <!-- Firlest-style close match for wordmark -->
-    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <!-- Core font families used across the site -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Merriweather:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome (icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pO12VfL0b4Qqf9X2kI9p0H0e2vM4a7e1QeR3m3u6cZkM8uI+3g9J+5x5iQj1Q8l6i2aE2f3r1Qy1b2Z6QwL7Nw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- Custom CSS - Complete and Fixed -->
+
+    <!-- Project styles -->
     <link rel="stylesheet" href="css/styles-complete.css?v=complete-38">
     <link rel="stylesheet" href="css/animations.css?v=20241029-6">
     <link rel="stylesheet" href="css/responsive.css?v=20241029-6">
 </head>
 <body>
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="preloader-content">
-            <div class="ink-drop"></div>
+    <!-- Preloader (safe fallback; JS hides it on load) -->
+    <div id="preloader" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#111;z-index:9999;">
+        <div class="preloader-content" style="color:#fff;font-family:'Open Sans',sans-serif;">
+            <div class="ink-drop" style="width:18px;height:18px;border-radius:50%;background:#dc143c;margin:0 auto 10px;animation:pulse 1s infinite;"></div>
             <p>Loading...</p>
         </div>
     </div>
-
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar" id="navbar" style="position:sticky;top:0;z-index:1000;">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="assets/images/gallery/circular-image (2).png" alt="BOBS Logo" class="logo-img">
+                <img src="assets/images/gallery/circular-image (2).png" alt="BOBS Tattoo Studio Logo" class="logo-img" width="96" height="96" loading="lazy" decoding="async">
                 <span class="logo-text">BOBS</span>
             </div>
             <div class="nav-menu" id="nav-menu">
                 <ul class="nav-list">
-                    <li class="nav-item">
-                        <a href="#home" class="nav-link animate-delay-1">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#artists" class="nav-link animate-delay-2">Artists</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#gallery" class="nav-link animate-delay-3">Gallery</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#about" class="nav-link animate-delay-4">Our Story</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#aftercare" class="nav-link animate-delay-1">Aftercare</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#blog" class="nav-link animate-delay-2">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#contact" class="nav-link animate-delay-3">Contact</a>
-                    </li>
+                    <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="#artists" class="nav-link">Artists</a></li>
+                    <li class="nav-item"><a href="#gallery" class="nav-link">Gallery</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link">Our Story</a></li>
+                    <li class="nav-item"><a href="#aftercare" class="nav-link">Aftercare</a></li>
+                    <li class="nav-item"><a href="#booking" class="nav-link">Book</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
-                <div class="nav-cta">
-                    <a href="#booking" class="btn btn-primary animate-delay-4">Book Now</a>
-                </div>
             </div>
             <div class="nav-toggle" id="nav-toggle">
                 <span class="bar"></span>
@@ -91,14 +68,6 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="decorative-circle"></div>
-        <div class="brick-circle"></div>
-        <div class="hero-background">
-            <video autoplay muted loop>
-                <source src="assets/videos/hero-bg.mp4" type="video/mp4">
-            </video>
-            <div class="hero-overlay"></div>
-        </div>
         <div class="hero-content">
             <h1 class="hero-title" data-aos="fade-up">
                 WHERE ART<br>
@@ -171,34 +140,36 @@
                 <p class="section-subtitle">Browse by style and theme</p>
             </div>
             <div class="categories-grid">
-                <a href="#gallery" class="category-card" data-category="all" style="background-image:url('assets/images/gallery/IMG_5864.JPG')">
+                <a href="#gallery" class="category-card" data-category="all">
                     <span class="category-title">All</span>
                 </a>
-                <a href="#gallery" class="category-card" data-category="realism" style="background-image:url('assets/images/gallery/IMG_9728.JPG')">
-                    <span class="category-title">Realism</span>
-                </a>
-                <a href="#gallery" class="category-card" data-category="religious" style="background-image:url('assets/images/gallery/0ED2AA45-29ED-4152-8224-69EAAD290358 (1).jpg')">
-                    <span class="category-title">Religious</span>
-                </a>
-                <a href="#gallery" class="category-card" data-category="geometric" style="background-image:url('assets/images/gallery/IMG_0623.JPG')">
-                    <span class="category-title">Geometric</span>
-                </a>
-                <a href="#gallery" class="category-card" data-category="portrait" style="background-image:url('assets/images/gallery/IMG_4183.JPG')">
-                    <span class="category-title">Portrait</span>
-                </a>
-                <a href="#gallery" class="category-card" data-category="animal" style="background-image:url('assets/images/gallery/IMG_5864.JPG')">
+                <a href="#gallery" class="category-card" data-category="animal">
                     <span class="category-title">Animal</span>
                 </a>
-                <a href="#gallery" class="category-card" data-category="watercolor" style="background-image:url('assets/images/gallery/IMG_5980.JPG')">
-                    <span class="category-title">Watercolor</span>
+                <a href="#gallery" class="category-card" data-category="big">
+                    <span class="category-title">BIG</span>
                 </a>
-                <a href="#gallery" class="category-card" data-category="coverup" style="background-image:url('assets/images/gallery/IMG_6591.JPG')">
-                    <span class="category-title">Coverup</span>
+                <a href="#gallery" class="category-card" data-category="couples">
+                    <span class="category-title">Couples</span>
                 </a>
-                <a href="#gallery" class="category-card" data-category="small" style="background-image:url('assets/images/gallery/IMG_7137.JPG')">
+                <a href="#gallery" class="category-card" data-category="realism">
+                    <span class="category-title">Realism</span>
+                </a>
+                <a href="#gallery" class="category-card" data-category="religious">
+                    <span class="category-title">Religious</span>
+                </a>
+                <a href="#gallery" class="category-card" data-category="sleeve">
+                    <span class="category-title">Sleeve</span>
+                </a>
+                <a href="#gallery" class="category-card" data-category="small">
                     <span class="category-title">Small</span>
                 </a>
-                
+                <a href="#gallery" class="category-card" data-category="students_work">
+                    <span class="category-title">Students_work</span>
+                </a>
+                <a href="#gallery" class="category-card" data-category="fineline">
+                    <span class="category-title">FineLine</span>
+                </a>
             </div>
         </div>
     </section>
@@ -210,23 +181,7 @@
         <div class="container">
             
             <div class="gallery-grid" id="gallery-grid">
-                <!-- Static gallery items: pure images, no titles or overlays -->
-                
-                <div class="gallery-item" data-category="neo-traditional">
-                    <img src="assets/images/gallery/Gemini_Generated_Image_rg7vucrg7vucrg7v.png" alt="Tattoo" loading="lazy">
-                </div>
-                <!-- Additional images from gallery -->
-                <div class="gallery-item" data-category="realism"><img src="assets/images/gallery/IMG_0381.JPG" alt="Tattoo" loading="lazy"></div>
-                <div class="gallery-item" data-category="geometric"><img src="assets/images/gallery/IMG_0623.JPG" alt="Tattoo" loading="lazy"></div>
-                <div class="gallery-item" data-category="portrait"><img src="assets/images/gallery/IMG_4183.JPG" alt="Tattoo" loading="lazy"></div>
-                <div class="gallery-item" data-category="animal"><img src="assets/images/gallery/IMG_5864.JPG" alt="Tattoo" loading="lazy"></div>
-                <div class="gallery-item" data-category="watercolor"><img src="assets/images/gallery/IMG_5980.JPG" alt="Tattoo" loading="lazy"></div>
-                <div class="gallery-item" data-category="coverup"><img src="assets/images/gallery/IMG_6591.JPG" alt="Tattoo" loading="lazy"></div>
-                <div class="gallery-item" data-category="small"><img src="assets/images/gallery/IMG_7137.JPG" alt="Tattoo" loading="lazy"></div>
-                <div class="gallery-item" data-category="realism"><img src="assets/images/gallery/IMG_9728.JPG" alt="Tattoo" loading="lazy"></div>
-                <div class="gallery-item" data-category="religious"><img src="assets/images/gallery/0ED2AA45-29ED-4152-8224-69EAAD290358 (1).jpg" alt="Tattoo" loading="lazy"></div>
-                <div class="gallery-item" data-category="couple"><img src="assets/images/gallery/B4F73E17-955D-4888-8744-77011583419C (1).jpg" alt="Tattoo" loading="lazy"></div>
-                <div class="gallery-item" data-category="mythology"><img src="assets/images/gallery/C0CA87EB-0D75-4708-88E5-8B3C0786C62B (1).jpg" alt="Tattoo" loading="lazy"></div>
+                <!-- Dynamically filled by js/gallery.js from assets/gallery-manifest.json -->
             </div>
         </div>
     </section>
@@ -277,7 +232,7 @@
                     </div>
                 </div>
                 <div class="about-image" data-aos="fade-left">
-                    <img src="assets/images/studio-interior.jpg" alt="Studio Interior" loading="lazy">
+                    <img src="assets/images/gallery/interior%20image.png" alt="Studio Interior" loading="lazy">
                 </div>
             </div>
         </div>
@@ -422,6 +377,7 @@
     </section>
 
     <!-- Testimonials Section -->
+    <!-- Testimonials section commented out per request
     <section class="testimonials">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
@@ -497,8 +453,10 @@
             </div>
         </div>
     </section>
+    -->
 
     <!-- Blog Section -->
+    <!-- Blog section commented out per request
     <section id="blog" class="blog">
         <div class="container">
             <div class="section-header" data-aos="fade-up">
@@ -554,6 +512,7 @@
             </div>
         </div>
     </section>
+    -->
 
     <!-- Instagram Feed Section -->
     <section class="instagram-feed">

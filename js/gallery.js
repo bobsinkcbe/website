@@ -1,61 +1,79 @@
 // Gallery functionality
 document.addEventListener('DOMContentLoaded', function() {
-    initGallery();
-    initGalleryFilters();
-    // Modal disabled for pure image grid
+    // Load dynamic gallery manifest, then initialize
+    loadManifest().finally(() => {
+        initGallery();
+        initGalleryFilters();
+        // Enable modal for enlarged view and category navigation
+        initGalleryModal();
+    });
 });
 
-// Gallery data (local images available in the repo)
-const galleryData = [
-    {
-        id: 1,
-        src: 'assets/images/gallery/Custom_design.JPG',
-        alt: 'Custom Tattoo Design',
-        category: 'color',
-        artist: 'Prabhu D.A',
-        title: 'Custom Design',
-        description: 'A bespoke tattoo concept crafted to tell a personal story.'
-    },
-    {
-        id: 2,
-        src: 'assets/images/gallery/Sterlie_env.png',
-        alt: 'Studio Work - Fine Line Details',
-        category: 'blackwork',
-        artist: 'Prabhu D.A',
-        title: 'Fine Line Work',
-        description: 'Clean lines and meticulous technique in a sterile environment.'
-    },
-    {
-        id: 3,
-        src: 'assets/images/gallery/Gemini_Generated_Image_rg7vucrg7vucrg7v.png',
-        alt: 'Studio Artwork',
-        category: 'neo-traditional',
-        artist: 'Prabhu D.A',
-        title: 'Studio Artwork',
-        description: 'Conceptual art direction showcased in-studio.'
-    },
-    {
-        id: 4,
-        src: 'blog/notattooimage.png',
-        alt: 'Recognized Artist Feature',
-        category: 'realism',
-        artist: 'Prabhu D.A',
-        title: 'Recognized Artist',
-        description: 'Celebrating recognized artistry with years of experience.'
+// Gallery data populated dynamically from assets/gallery-manifest.json
+let galleryData = [];
+let modalState = { open: false, list: [], index: 0 };
+
+async function loadManifest() {
+    const url = '/assets/gallery-manifest.json?v=' + Date.now();
+    try {
+        const res = await fetch(url, { cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const manifest = await res.json();
+        const cats = manifest && manifest.categories ? manifest.categories : {};
+        const items = [];
+        let id = 1;
+        Object.keys(cats).forEach(cat => {
+            (cats[cat] || []).forEach(src => {
+                items.push({ id: id++, src, alt: 'Tattoo', category: cat });
+            });
+        });
+        galleryData = items;
+        filteredGallery = [...galleryData];
+        // Fallback: if a category is empty, try directory listing (works on some servers like Python http.server)
+    const KNOWN_CATS = ['animal','big','couples','realism','religious','sleeve','small','students_work','fineline'];
+        const missingCats = KNOWN_CATS.filter(cat => !cats[cat] || cats[cat].length === 0);
+        if (missingCats.length) {
+            const discovered = await discoverFromDirectories(missingCats);
+            discovered.forEach(({src, category}) => items.push({ id: id++, src, alt: 'Tattoo', category }));
+            galleryData = items;
+            filteredGallery = [...galleryData];
+        }
+    } catch (e) {
+        console.warn('Failed to load gallery manifest, using fallback/static items if any:', e);
     }
-];
+}
+
+async function discoverFromDirectories(categories) {
+    const results = [];
+    const exts = ['.jpg','.jpeg','.png','.webp','.gif','.JPG','.JPEG','.PNG','.WEBP','.GIF'];
+    function isImage(href) { return exts.some(ext => href.endsWith(ext)); }
+    for (const cat of categories) {
+        try {
+            const folders = cat === 'fineline' ? ['fineline','thineline'] : [cat];
+            for (const folder of folders) {
+                const resp = await fetch(`/assets/images/gallery/${folder}/`, { cache: 'no-store' });
+                if (!resp.ok) continue;
+                const html = await resp.text();
+                const hrefs = Array.from(html.matchAll(/href=\"([^\"]+)\"/g)).map(m => m[1]);
+                hrefs.filter(isImage).forEach(name => {
+                    const src = `/assets/images/gallery/${folder}/${name}`;
+                    results.push({ src, category: cat });
+                });
+            }
+        } catch (_) { /* ignore */ }
+    }
+    return results;
+}
 
 let currentFilter = 'all';
 let currentPage = 1;
-const itemsPerPage = 8;
+const itemsPerPage = 24;
 let filteredGallery = [...galleryData];
 
 function initGallery() {
     const galleryGrid = document.getElementById('gallery-grid');
-    // If the grid already has static items, skip dynamic loading
-    if (galleryGrid && galleryGrid.children.length > 0) {
-        return;
-    }
+    // Always (re)render from galleryData
+    if (galleryGrid) galleryGrid.innerHTML = '';
     loadGalleryItems();
     initLoadMoreButton();
 }
@@ -109,6 +127,8 @@ function loadGalleryItems() {
     
     itemsToShow.forEach((item, index) => {
         const galleryItem = createGalleryItem(item, index);
+        // Open modal on click and allow navigation within the same category
+        galleryItem.addEventListener('click', () => openImageModal(item, index));
         galleryGrid.appendChild(galleryItem);
     });
     
@@ -190,31 +210,13 @@ function createGalleryModal() {
         <div id="gallery-modal" class="gallery-modal">
             <div class="modal-overlay"></div>
             <div class="modal-content">
-                <button class="modal-close" aria-label="Close modal">
-                    <i class="fas fa-times"></i>
-                </button>
+                <button class="modal-close" aria-label="Close modal">×</button>
                 <div class="modal-image-container">
                     <img id="modal-image" src="" alt="">
-                    <button class="modal-nav modal-prev" aria-label="Previous image">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button class="modal-nav modal-next" aria-label="Next image">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
+                    <button class="modal-nav modal-prev" aria-label="Previous image">‹</button>
+                    <button class="modal-nav modal-next" aria-label="Next image">›</button>
                 </div>
-                <div class="modal-info">
-                    <h3 id="modal-title"></h3>
-                    <p id="modal-artist"></p>
-                    <p id="modal-description"></p>
-                    <div class="modal-actions">
-                        <button class="btn btn-primary" onclick="bookConsultation()">
-                            Book Consultation
-                        </button>
-                        <button class="btn btn-outline" onclick="shareImage()">
-                            <i class="fas fa-share"></i> Share
-                        </button>
-                    </div>
-                </div>
+                <div class="modal-info"></div>
             </div>
         </div>
     `;
@@ -369,12 +371,12 @@ function createGalleryModal() {
     const modalOverlay = modal.querySelector('.modal-overlay');
     const modalPrev = modal.querySelector('.modal-prev');
     const modalNext = modal.querySelector('.modal-next');
-    
+
     modalClose.addEventListener('click', closeGalleryModal);
     modalOverlay.addEventListener('click', closeGalleryModal);
     modalPrev.addEventListener('click', showPreviousImage);
     modalNext.addEventListener('click', showNextImage);
-    
+
     // Keyboard navigation
     document.addEventListener('keydown', function(e) {
         if (modal.classList.contains('active')) {
@@ -391,6 +393,47 @@ function createGalleryModal() {
             }
         }
     });
+}
+
+function openImageModal(item, indexInRendered) {
+    // Build a list of images from the same category as the clicked item
+    const category = item.category;
+    const list = galleryData.filter(i => i.category === category);
+    modalState.list = list;
+    modalState.index = list.findIndex(i => i.src === item.src);
+    if (modalState.index < 0) {
+        modalState.index = 0;
+    }
+    showModalWithCurrent();
+}
+
+function showModalWithCurrent() {
+    const modal = document.getElementById('gallery-modal');
+    const img = document.getElementById('modal-image');
+    if (!modalState.list.length) return;
+    const current = modalState.list[modalState.index];
+    img.src = current.src;
+    img.alt = current.alt || 'Tattoo';
+    modal.classList.add('active');
+    modalState.open = true;
+}
+
+function closeGalleryModal() {
+    const modal = document.getElementById('gallery-modal');
+    modal.classList.remove('active');
+    modalState.open = false;
+}
+
+function showPreviousImage() {
+    if (!modalState.list.length) return;
+    modalState.index = (modalState.index - 1 + modalState.list.length) % modalState.list.length;
+    showModalWithCurrent();
+}
+
+function showNextImage() {
+    if (!modalState.list.length) return;
+    modalState.index = (modalState.index + 1) % modalState.list.length;
+    showModalWithCurrent();
 }
 
 let currentModalIndex = 0;

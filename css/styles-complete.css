@@ -28,9 +28,7 @@ svg.icon-location {
 }
 
 /* Import Clean, Readable Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Merriweather:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
-/* Strong geometric fallback for pasted wordmark font */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800;900&family=Merriweather:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
 
 /* CLEAN FONT SYSTEM */
 * {
@@ -324,24 +322,20 @@ img {
 /* Brand text next to logo */
 .logo-text {
     margin-left: 12px;
-    /* Prefer drop-in BrandWordmark; fall back to strong geometric; then Firlest */
-    font-family: 'BrandWordmark', 'Montserrat', 'Firlest', 'Pirata One', serif !important;
-    font-weight: 900;
+    /* Brand wordmark: Open Sans bold, uppercase */
+    font-family: 'Open Sans', sans-serif !important;
+    font-weight: 800 !important;
     text-transform: uppercase;
-    letter-spacing: 0.02em; /* closer tracking to match pasted sample */
-    font-size: 2.4rem; /* slight bump for presence */
+    letter-spacing: 0.02em;
+    font-size: 2.4rem;
     line-height: 1.1;
-
-    /* Black wordmark per request */
     color: #000;
-    /* Remove stroke/shadow to exactly match pasted solid style */
     text-shadow: none;
     -webkit-text-stroke: 0;
     background: none;
     -webkit-background-clip: initial;
     background-clip: initial;
     -webkit-text-fill-color: initial;
-
     position: relative;
     display: inline-block;
     white-space: nowrap;
@@ -775,11 +769,23 @@ section {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
+    /* Robust thumbnail rendering using an img inside the card */
+    .category-card .bg-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+        display: block;
+    }
+
     .category-card::after {
         content: '';
         position: absolute;
         inset: 0;
         background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.55) 100%);
+        z-index: 1;
     }
 
     .category-title {
@@ -789,7 +795,7 @@ section {
         color: var(--text-on-dark);
         font-weight: 700;
         letter-spacing: 0.5px;
-        z-index: 1;
+        z-index: 2;
     }
 
     .category-card:hover {
@@ -1189,14 +1195,14 @@ section {
         justify-content: center;
         flex-wrap: wrap;
     }
-    .logo-text { font-size: 1.5rem; -webkit-text-stroke: 0.2px rgba(0,0,0,0.35); }
+    .logo-text { font-size: 1.5rem; -webkit-text-stroke: 0; }
 
-    /* Revert logo text to default site font/style */
+    /* Keep brand consistent on mobile */
     .logo-text {
         font-family: 'Open Sans', sans-serif !important;
-        font-weight: 400 !important;
-        text-transform: none !important;
-        letter-spacing: normal !important;
+        font-weight: 800 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.02em !important;
         -webkit-text-stroke: 0 !important;
         text-shadow: none !important;
         font-size: 1.5rem !important;
@@ -1935,18 +1941,11 @@ section {
 }
 
 .contact-icon img {
-    display: block;
-    width: 32px;
-    height: 32px;
-}
-
-.contact-icon img {
     width: 32px;
     height: 32px;
     display: block;
 }
 
-}
 
 .contact-icon:hover {
     transform: translateY(-3px) scale(1.1);

@@ -1,7 +1,7 @@
 /* Service Worker for Performance and Caching */
 
 // Bump this to force a fresh SW install and cache reset
-const CACHE_NAME = 'bobs-tattoo-v57';
+const CACHE_NAME = 'bobs-tattoo-v71';
 
 // Cache only local essentials to avoid CORS issues
 const urlsToCache = [
@@ -16,6 +16,7 @@ const urlsToCache = [
     '/js/booking.js',
     '/js/instagram.js?v=20251106-tiles4',
     '/assets/images/background.jpg',
+    '/assets/gallery-manifest.json',
     '/assets/images/gallery/circular-image (2).png',
     '/blog/notattooimage.png',
     
