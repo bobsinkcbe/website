@@ -1,0 +1,8 @@
+{
+  "provider": "formsubmit",
+  "endpoint": "https://formsubmit.co/ajax/bobsinkcbe@gmail.com",
+  "emailTo": "bobsinkcbe@gmail.com",
+  "sendCopyToCustomer": true,
+  "subject": "New Tattoo Booking Request via Website",
+  "template": "table"
+}

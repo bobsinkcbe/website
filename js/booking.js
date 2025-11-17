@@ -9,30 +9,18 @@ document.addEventListener('DOMContentLoaded', function() {
 // Booking configuration
 const bookingConfig = {
     artists: {
-        'marcus': {
-            name: 'Marcus Rivera',
-            specialty: 'Realism & Portraits',
-            hourlyRate: 150,
-            availability: ['tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
-        },
-        'sakura': {
-            name: 'Sakura Chen',
-            specialty: 'Japanese Traditional',
-            hourlyRate: 140,
-            availability: ['monday', 'wednesday', 'thursday', 'friday', 'saturday']
-        },
-        'alex': {
-            name: 'Alex Thompson',
-            specialty: 'Neo-Traditional',
-            hourlyRate: 130,
-            availability: ['tuesday', 'wednesday', 'friday', 'saturday', 'sunday']
+        'prabhu': {
+            name: 'Prabhu D.A',
+            specialty: 'All Styles',
+            pricePerSquareInch: 499, // ₹499 per square inch
+            availability: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
         }
     },
     sizeMultipliers: {
-        'small': 1,
-        'medium': 1.5,
-        'large': 2.5,
-        'sleeve': 4
+        'small': 4,      // ~2x2 inches = 4 sq in
+        'medium': 16,    // ~4x4 inches = 16 sq in
+        'large': 64,     // ~8x8 inches = 64 sq in
+        'sleeve': 200    // Full sleeve ~200 sq in
     },
     styleComplexity: {
         'realism': 1.3,
@@ -41,7 +29,7 @@ const bookingConfig = {
         'blackwork': 1.1,
         'color': 1.4
     },
-    consultationFee: 50,
+    consultationFee: 500,  // ₹500 consultation fee
     depositPercentage: 0.3 // 30% deposit required
 };
 
@@ -67,11 +55,7 @@ function addFormEnhancements() {
         phoneInput.addEventListener('input', formatPhoneNumber);
     }
     
-    // Artist selection change handler
-    const artistSelect = document.getElementById('artist');
-    if (artistSelect) {
-        artistSelect.addEventListener('change', updateArtistInfo);
-    }
+    // Artist is fixed to Prabhu, no selection needed
     
     // Size and style change handlers for price estimation
     const sizeSelect = document.getElementById('size');
@@ -99,22 +83,11 @@ function formatPhoneNumber(e) {
 }
 
 function updateArtistInfo() {
-    const artistSelect = document.getElementById('artist');
-    const selectedArtist = artistSelect.value;
-    
-    if (selectedArtist && bookingConfig.artists[selectedArtist]) {
-        const artist = bookingConfig.artists[selectedArtist];
-        
-        // Show artist info
-        showArtistInfo(artist);
-        
-        // Update available time slots
-        updateAvailableSlots(artist.availability);
-    } else {
-        hideArtistInfo();
+    // Artist is always Prabhu D.A, no dynamic selection
+    const artist = bookingConfig.artists['prabhu'];
+    if (artist) {
+        updatePriceEstimate();
     }
-    
-    updatePriceEstimate();
 }
 
 function showArtistInfo(artist) {
@@ -174,43 +147,23 @@ function addPriceEstimateDisplay() {
 }
 
 function updatePriceEstimate() {
-    const artistSelect = document.getElementById('artist');
     const sizeSelect = document.getElementById('size');
     const styleSelect = document.getElementById('style');
     const estimateContainer = document.getElementById('price-estimate');
     
-    if (!artistSelect.value || !sizeSelect.value || !styleSelect.value) {
-        estimateContainer.style.display = 'none';
+    if (!sizeSelect || !styleSelect || !sizeSelect.value || !styleSelect.value) {
+        if (estimateContainer) estimateContainer.style.display = 'none';
         return;
     }
     
-    const artist = bookingConfig.artists[artistSelect.value];
-    const sizeMultiplier = bookingConfig.sizeMultipliers[sizeSelect.value];
+    const artist = bookingConfig.artists['prabhu'];
+    const squareInches = bookingConfig.sizeMultipliers[sizeSelect.value];
     const styleMultiplier = bookingConfig.styleComplexity[styleSelect.value];
     
-    // Base calculation (2-4 hours for small, scaling up)
-    const baseHours = sizeSelect.value === 'small' ? 3 : 
-                     sizeSelect.value === 'medium' ? 5 :
-                     sizeSelect.value === 'large' ? 8 : 15;
-    
-    const estimatedHours = Math.ceil(baseHours * styleMultiplier);
-    const totalCost = (estimatedHours * artist.hourlyRate) + bookingConfig.consultationFee;
-    const depositAmount = Math.ceil(totalCost * bookingConfig.depositPercentage);
-    
-    estimateContainer.innerHTML = `
-        <h4>Price Estimate</h4>
-        <div class="estimate-breakdown">
-            <p><strong>Estimated Time:</strong> ${estimatedHours} hours</p>
-            <p><strong>Rate:</strong> $${artist.hourlyRate}/hour</p>
-            <p><strong>Consultation Fee:</strong> $${bookingConfig.consultationFee}</p>
-            <hr style="margin: 15px 0; border-color: var(--text-secondary);">
-            <p><strong>Total Estimate:</strong> $${totalCost}</p>
-            <p><strong>Required Deposit:</strong> $${depositAmount}</p>
-        </div>
-        <small style="color: var(--text-secondary); margin-top: 10px; display: block;">
-            *This is an estimate. Final pricing will be determined during consultation.
-        </small>
-    `;
+    // Hide price estimate - pricing discussed during consultation only
+    if (estimateContainer) {
+        estimateContainer.style.display = 'none';
+    }
     
     estimateContainer.style.display = 'block';
     
@@ -276,24 +229,17 @@ function getTomorrowDate() {
 }
 
 function checkAvailability() {
-    const artistSelect = document.getElementById('artist');
     const dateInput = document.getElementById('preferred-date');
-    const timeSelect = document.getElementById('preferred-time');
     
-    if (artistSelect.value && dateInput.value) {
+    if (dateInput && dateInput.value) {
         const selectedDate = new Date(dateInput.value);
-        const dayOfWeek = selectedDate.toLocaleLowerCase().slice(0, 3) + 
-                         selectedDate.toLocaleLowerCase().slice(3);
         const weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
         const dayName = weekdays[selectedDate.getDay()];
         
-        const artist = bookingConfig.artists[artistSelect.value];
+        const artist = bookingConfig.artists['prabhu'];
         
-        if (!artist.availability.includes(dayName)) {
-            showAvailabilityWarning(`${artist.name} is not available on ${dayName}s. Available days: ${artist.availability.join(', ')}`);
-        } else {
-            hideAvailabilityWarning();
-        }
+        // Prabhu is available all days, so no warning needed
+        hideAvailabilityWarning();
     }
 }
 
@@ -538,6 +484,9 @@ function handleBookingSuccess(bookingData) {
     // Send confirmation email (simulation)
     sendConfirmationEmail(bookingData);
     
+    // Dispatch event for email integration
+    form.dispatchEvent(new CustomEvent('booking-internal-success', { detail: bookingData, bubbles: true }));
+    
     // Show notification
     showNotification('Booking request submitted successfully!', 'success');
     
@@ -604,3 +553,147 @@ window.bookConsultation = function() {
 };
 
 window.resetBookingForm = resetBookingForm;
+
+// Email submission integration (Formspree or similar)
+// Configuration is stored in assets/booking-config.json (static JSON loaded via fetch)
+// If formspreeEndpoint is empty, email sending will be skipped and a warning logged.
+(function integrateEmailSubmission(){
+    const form = document.getElementById('booking-form');
+    if(!form) return;
+
+    let config = null;
+    fetch('assets/booking-config.json').then(r => r.json()).then(data => { config = data; }).catch(() => {
+        console.warn('Booking email config not found; email sending disabled');
+    });
+
+    // Override submit to send real request after validation success path
+    const originalSubmitHandler = form.onsubmit; // we used addEventListener earlier; keep compatibility
+    form.addEventListener('submit', function(evt){
+        // The existing handler already preventsDefault; just ensure we run after success
+        // We hook into success by listening for custom event 'booking:success'
+    });
+
+    document.addEventListener('booking:success', function(e){
+        const bookingData = e.detail;
+        if(!config){ console.warn('No config loaded.'); return; }
+        if(config.provider === 'formspree') {
+            if(!config.formspreeEndpoint){ console.warn('Formspree endpoint missing'); return; }
+            sendBookingEmail_Formspree(config.formspreeEndpoint, bookingData);
+        } else if(config.provider === 'formsubmit') {
+            if(!config.endpoint){ console.warn('FormSubmit endpoint missing'); return; }
+            sendBookingEmail_FormSubmit(config, bookingData);
+        } else {
+            console.warn('Unknown email provider in config');
+        }
+    });
+})();
+
+function sendBookingEmail_Formspree(endpoint, booking){
+    // Construct payload compatible with Formspree (simple key-value)
+    const payload = new FormData();
+    payload.append('name', booking.name || '');
+    payload.append('email', booking.email || '');
+    payload.append('phone', booking.phone || '');
+    payload.append('artist', booking.artist || '');
+    payload.append('style', booking.style || '');
+    payload.append('size', booking.size || '');
+    payload.append('description', booking.description || '');
+    payload.append('preferred_date', booking['preferred-date'] || '');
+    payload.append('preferred_time', booking['preferred-time'] || '');
+    payload.append('first_tattoo', booking['first-tattoo'] ? 'Yes' : 'No');
+    payload.append('_subject', 'New Tattoo Booking Request');
+    payload.append('_replyto', booking.email || '');
+
+    fetch(endpoint, { method:'POST', body: payload })
+        .then(r => {
+            if(!r.ok) throw new Error('Email send failed');
+            showNotification('Booking details emailed successfully.', 'success');
+        })
+        .catch(err => {
+            console.warn('Email send error:', err);
+            showNotification('Could not send email at this time.', 'error');
+        });
+}
+
+function sendBookingEmail_FormSubmit(config, booking){
+    const payload = new FormData();
+    payload.append('name', booking.name || '');
+    payload.append('email', booking.email || '');
+    payload.append('phone', booking.phone || '');
+    payload.append('artist', booking.artist || '');
+    payload.append('style', booking.style || '');
+    payload.append('size', booking.size || '');
+    payload.append('description', booking.description || '');
+    payload.append('preferred_date', booking['preferred-date'] || '');
+    payload.append('preferred_time', booking['preferred-time'] || '');
+    payload.append('first_tattoo', booking['first-tattoo'] ? 'Yes' : 'No');
+    if(config.subject) payload.append('_subject', config.subject);
+    if(config.sendCopyToCustomer && booking.email) payload.append('_cc', booking.email);
+    if(config.template) payload.append('_template', config.template);
+    payload.append('_captcha', 'false');
+
+    fetch(config.endpoint, { method:'POST', body: payload, headers: { 'Accept':'application/json' } })
+        .then(async r => {
+            let data = null; try { data = await r.json(); } catch(_) {}
+            if(r.ok) {
+                showNotification('Booking email sent to studio.', 'success');
+            } else {
+                console.warn('FormSubmit non-OK response', r.status, data);
+                showNotification('Email service responded with an error. Falling back...', 'error');
+                fallbackSubmitViaAction(booking);
+            }
+        })
+        .catch(err => {
+            console.warn('Email send error:', err);
+            showNotification('Could not send booking email. Trying fallback...', 'error');
+            fallbackSubmitViaAction(booking);
+        });
+}
+
+function fallbackSubmitViaAction(booking){
+    try {
+        const action = 'https://formsubmit.co/bobsinkcbe@gmail.com';
+        const f = document.createElement('form');
+        f.method = 'POST';
+        f.action = action;
+        f.target = '_blank';
+        const kv = {
+            name: booking.name || '',
+            email: booking.email || '',
+            phone: booking.phone || '',
+            artist: booking.artist || '',
+            style: booking.style || '',
+            size: booking.size || '',
+            description: booking.description || '',
+            preferred_date: booking['preferred-date'] || '',
+            preferred_time: booking['preferred-time'] || '',
+            first_tattoo: booking['first-tattoo'] ? 'Yes' : 'No',
+            _subject: 'New Tattoo Booking Request via Website',
+            _template: 'table',
+            _captcha: 'false',
+            _next: location.origin + '/#booking'
+        };
+        Object.entries(kv).forEach(([k,v])=>{
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = k;
+            input.value = String(v);
+            f.appendChild(input);
+        });
+        document.body.appendChild(f);
+        f.submit();
+        setTimeout(()=>{ f.remove(); }, 1000);
+    } catch(e) {
+        console.warn('Fallback submit failed', e);
+    }
+}
+
+// Attach event listener to emit booking success event for email integration
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('booking-form');
+    if (form) {
+        form.addEventListener('booking-internal-success', function(e) {
+            document.dispatchEvent(new CustomEvent('booking:success', { detail: e.detail }));
+        });
+    }
+});

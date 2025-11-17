@@ -252,6 +252,18 @@ Key mobile features:
 - Ensure proper form action endpoints
 - Verify server-side processing if implemented
 
+### Booking emails (FormSubmit setup)
+This site is static and uses FormSubmit to email booking requests directly to `bobsinkcbe@gmail.com`.
+
+Configured files:
+- `index.html`: booking form `action="https://formsubmit.co/bobsinkcbe@gmail.com"` with hidden `_captcha=false`, `_template=table`, `_subject`, and `_next`.
+- `assets/booking-config.json`: provider set to `formsubmit` with the AJAX endpoint.
+- `js/booking.js`: sends via AJAX first; if it fails, it falls back to posting the form to FormSubmit in a new tab.
+
+First-time verification: FormSubmit sends a verification email to the recipient the first time. Please check the inbox/spam folder and click the verification link. Emails will not deliver until verified.
+
+Alternatives: If you prefer EmailJS, Getform, Netlify Forms, or Formspree, we can switch the adapter by updating the config and a small part of `booking.js`.
+
 **Slow Loading**
 - Optimize image sizes
 - Check network requests in browser dev tools

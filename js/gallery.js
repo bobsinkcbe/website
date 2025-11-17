@@ -242,7 +242,16 @@ function createGalleryModal() {
             
             .gallery-modal.active {
                 display: flex;
-                opacity: 1;
+                animation: fadeInModal 0.3s ease-out forwards;
+            }
+            
+            @keyframes fadeInModal {
+                0% {
+                    opacity: 0;
+                }
+                100% {
+                    opacity: 1;
+                }
             }
             
             .modal-overlay {
@@ -265,6 +274,18 @@ function createGalleryModal() {
                 display: grid;
                 grid-template-columns: 2fr 1fr;
                 box-shadow: var(--shadow-heavy);
+                animation: slideUpModal 0.4s ease-out;
+            }
+            
+            @keyframes slideUpModal {
+                0% {
+                    opacity: 0;
+                    transform: translateY(50px) scale(0.95);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
             }
             
             .modal-close {
@@ -301,6 +322,18 @@ function createGalleryModal() {
                 max-width: 100%;
                 max-height: 100%;
                 object-fit: contain;
+                animation: zoomInImage 0.4s ease-out;
+            }
+            
+            @keyframes zoomInImage {
+                0% {
+                    opacity: 0;
+                    transform: scale(0.8);
+                }
+                100% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
             }
             
             .modal-nav {
@@ -412,8 +445,14 @@ function showModalWithCurrent() {
     const img = document.getElementById('modal-image');
     if (!modalState.list.length) return;
     const current = modalState.list[modalState.index];
-    img.src = current.src;
-    img.alt = current.alt || 'Tattoo';
+    
+    // Reset animation by removing and re-adding the element
+    const parent = img.parentNode;
+    const newImg = img.cloneNode(true);
+    parent.replaceChild(newImg, img);
+    
+    newImg.src = current.src;
+    newImg.alt = current.alt || 'Tattoo';
     modal.classList.add('active');
     modalState.open = true;
 }

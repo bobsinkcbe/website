@@ -386,6 +386,21 @@ img {
     font-weight: 600;
     box-shadow: var(--shadow-dark);
     transition: all 0.3s ease;
+/* Ensure inline SVG icons are visible and consistent */
+.social-links a svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+    color: #fff;
+}
+/* Stroke-based icons pick color from currentColor */
+.social-links a svg [stroke] {
+    stroke: currentColor;
+}
+/* Filled shapes use currentColor for contrast */
+.social-links a svg [fill="currentColor"] {
+    fill: currentColor;
+}
 }
 
 .nav-cta .btn:hover {
@@ -831,18 +846,28 @@ section {
     overflow: hidden;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-light);
-    transition: transform 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
 }
 
 .gallery-item:hover {
-    transform: translateY(-10px);
-    box-shadow: var(--shadow-dark);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(220, 20, 60, 0.3), 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-item:active {
+    transform: translateY(-5px) scale(0.98);
 }
 
 .gallery-item img {
     width: 100%;
     height: 250px;
     object-fit: cover;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
 }
 
 /* About Section */
@@ -1040,6 +1065,13 @@ section {
     font-size: 1.2rem;
 }
 
+/* Ensure Font Awesome icons inside retain white color and are visible */
+.social-links a i { color: #fff !important; line-height: 1; }
+.social-links a svg { width: 22px; height: 22px; fill: #fff; }
+
+/* Fallback: if icon font fails to load, show abbreviation text */
+.social-links a:empty::after { content: attr(aria-label); font-size: 0.55rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; }
+
 .social-links a:hover {
     background: var(--warm-red);
     transform: translateY(-3px);
@@ -1058,6 +1090,15 @@ section {
 
 .footer-bottom p {
     color: var(--text-on-dark);
+.social-links a i { 
+    color:#fff !important; 
+    font-size:24px; 
+    line-height:1; 
+}
+/* Fallback text if icon font fails to load */
+.social-links a:empty::after, .social-links a i:before { 
+    font-family: inherit; 
+}
     opacity: 0.7;
     margin: 0;
 }
@@ -1939,6 +1980,12 @@ section {
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(220, 20, 60, 0.2);
 }
+.contact-icon img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+}
 
 .contact-icon img {
     width: 32px;
@@ -1961,6 +2008,20 @@ section {
 .contact-card p {
     color: var(--text-secondary);
     line-height: 1.6;
+}
+
+/* Studio Info tidy layout */
+.contact-summary { text-align: left; }
+.contact-summary h3 { text-align: center; margin-bottom: 16px; }
+.contact-summary .contact-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+.contact-summary .col-details > div + div { margin-top: 12px; }
+@media (max-width: 768px) {
+    .contact-summary .contact-row { grid-template-columns: 1fr; }
 }
 
 /* Font Classes */

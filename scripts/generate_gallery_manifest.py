@@ -17,7 +17,7 @@ CANONICAL_CATEGORIES = [
 ALIASES = {
     'fineline': ['fineline', 'thineline'],
     # Map BIG category folders (case variants) and legacy 'buddha' into canonical 'big'
-    'big': ['big', 'BIG', 'buddha']
+    'big': ['big', 'buddha']
 }
 
 # Allowed image extensions

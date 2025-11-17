@@ -1,6 +1,7 @@
 // One-time cache reset to ensure users receive the latest assets
 (function() {
-    const CLEAR_VERSION = '2025-11-07-18';
+    // Cache version - increment when significant changes are made
+const CLEAR_VERSION = '2025-11-17-10';
     const KEY = 'bobs-cache-cleared';
     try {
         const stored = localStorage.getItem(KEY);
